@@ -1,1 +1,1 @@
-python3 -m Alphabot
+python3 Audify/__main__.py
