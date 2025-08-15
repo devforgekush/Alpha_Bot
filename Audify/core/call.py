@@ -16,7 +16,7 @@ from pytgcalls.types import (
     VideoQuality,
     Update,
 )
-from pytgcalls.types.stream import StreamAudioEnded
+
 
 import config
 from Audify import LOGGER, YouTube, app
@@ -625,8 +625,7 @@ class Call(PyTgCalls):
         @self.four.on_stream_end()
         @self.five.on_stream_end()
         async def stream_end_handler(client, update: Update):
-            if not isinstance(update, StreamAudioEnded):
-                return
+            # StreamAudioEnded removed; handle with generic Update if needed
             await self.change_stream(client, update.chat_id)
 
 
