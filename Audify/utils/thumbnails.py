@@ -189,15 +189,19 @@ async def get_thumb(videoid: str):
                 gradient_image = generate_gradient(1280, 720, start_gradient_color, end_gradient_color)
                 background = Image.blend(background, gradient_image, alpha=0.2)
 
-                draw = ImageDraw.Draw(background)
-                arial = ImageFont.truetype("Alphabot/assets/font2.ttf", 30)
-                font = ImageFont.truetype("Alphabot/assets/font.ttf", 30)
-                title_font = ImageFont.truetype("Alphabot/assets/font3.ttf", 45)
+                try:
+                    draw = ImageDraw.Draw(background)
+                    arial = ImageFont.truetype("Alphabot/assets/font2.ttf", 30)
+                    font = ImageFont.truetype("Alphabot/assets/font.ttf", 30)
+                    title_font = ImageFont.truetype("Alphabot/assets/font3.ttf", 45)
 
-                circle_thumbnail = crop_center_circle(youtube, 400, 20, start_gradient_color)
-                circle_thumbnail = circle_thumbnail.resize((400, 400))
-                circle_position = (120, 160)
-                background.paste(circle_thumbnail, circle_position, circle_thumbnail)
+                    circle_thumbnail = crop_center_circle(youtube, 400, 20, start_gradient_color)
+                    circle_thumbnail = circle_thumbnail.resize((400, 400))
+                    circle_position = (120, 160)
+                    background.paste(circle_thumbnail, circle_position, circle_thumbnail)
+                except Exception as e:
+                    logging.error(f"Error in font loading or thumbnail generation: {e}")
+                    return None
 
                 text_x_position = 565
                 title1 = truncate(title)
