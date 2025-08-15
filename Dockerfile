@@ -9,6 +9,7 @@ RUN sed -i 's|http://deb.debian.org/debian-security|http://archive.debian.org/de
     rm -rf /var/lib/apt/lists/*
 
 COPY . /app/
+COPY config.py /app/config.py
 WORKDIR /app/
 RUN pip3 install --no-cache-dir -U -r requirements.txt
 
