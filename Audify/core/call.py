@@ -8,7 +8,6 @@ from pyrogram.types import InlineKeyboardMarkup
 from ntgcalls import TelegramServerError
 from pytgcalls import PyTgCalls
 from pytgcalls.exceptions import (
-    AlreadyJoinedError,
     NoActiveGroupCall,
 )
 from pytgcalls.types import (
@@ -338,8 +337,7 @@ class Call(PyTgCalls):
             )
         except NoActiveGroupCall:
             raise AssistantErr(_["call_8"])
-        except AlreadyJoinedError:
-            raise AssistantErr(_["call_9"])
+    # AlreadyJoinedError removed; handle with generic Exception if needed
         except TelegramServerError:
             raise AssistantErr(_["call_10"])
         except Exception as e:
