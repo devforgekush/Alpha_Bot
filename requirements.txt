@@ -34,7 +34,7 @@ pycountry>=23.12.12
 pycryptodome>=3.20.0
 pydub>=0.25.1
 pyfiglet>=0.8.post1
-pykeyboard>=0.2.4
+pykeyboard==0.1.5
 pyshorteners>=1.0.1
 pyrofork>=1.0.0
 python-dotenv>=1.0.1
