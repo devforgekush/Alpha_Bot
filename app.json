@@ -1,0 +1,84 @@
+{
+  "name": "Audify",
+  "description": "Audify is a powerful Telegram Music + Management Bot powered by Python, Pyrogram, and PyTgCalls. It streams high-quality music in group voice chats, manages your community, auto-moderates, and supports Spotify, YouTube, and more — all in one bot.",
+  "logo": "https://files.catbox.moe/6mgel1.jpg",
+  "keywords": [
+    "python3",
+    "telegram",
+    "bot",
+    "GrayBots",
+    "MusicBot",
+    "ManagementBot",
+    "Telegram-Music-Bot",
+    "Pyrogram",
+    "PyTgCalls",
+    "VoiceChat",
+    "Community-Management",
+    "Spotify",
+    "YouTube"
+  ],
+  "env": {
+    "API_ID": {
+      "description": "Get this from https://my.telegram.org (API Development Tools).",
+      "value": "",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Get this from https://my.telegram.org (API Development Tools).",
+      "value": "",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Bot token from @BotFather on Telegram.",
+      "value": "",
+      "required": true
+    },
+    "LOGGER_ID": {
+      "description": "Log group/chat ID where bot will send logs. Add bot as admin with full rights. (Use -100 prefix for groups).",
+      "value": "",
+      "required": true
+    },
+    "MONGO_DB_URI": {
+      "description": "MongoDB connection URI (Get from https://cloud.mongodb.com or self-hosted MongoDB).",
+      "value": "",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "Your Telegram user ID (Owner of the bot). Use @userinfobot to find your ID.",
+      "value": "",
+      "required": true
+    },
+    "STRING_SESSION": {
+      "description": "Pyrogram v2 String Session for assistant account (Use a session generator bot or script).",
+      "value": "",
+      "required": true
+    },
+    "SPOTIFY_CLIENT_ID": {
+      "description": "Spotify API Client ID. Get from https://developer.spotify.com/dashboard.",
+      "value": "",
+      "required": true
+    },
+    "SPOTIFY_CLIENT_SECRET": {
+      "description": "Spotify API Client Secret. Get from https://developer.spotify.com/dashboard.",
+      "value": "",
+      "required": true
+    },
+    "API_KEY": {
+      "description": "Get it from https://t.me/Nikchil.",
+      "value": "",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    }
+  ],
+  "stack": "container"
+}

@@ -1,0 +1,134 @@
+#!/bin/bash
+
+# ---------------------------------------------------------
+# Alphabot - All rights reserved
+# ---------------------------------------------------------
+# This installer sets up all dependencies and saves your bot's .env variables.
+# ---------------------------------------------------------
+
+pprint (){
+	cred='\033[0;31m'
+	cgreen='\033[0;32m'
+	cyellow='\033[0;33m'
+	cblue='\033[0;34m'
+	cpurple='\033[0;35m'
+	eval "export color='$cpurple'"
+	[ ! -z $2 ] && eval "export color=\"\$$2\""
+    printf "$color $1"
+}
+
+color_reset(){ printf '\033[0;37m'; }
+
+yesnoprompt(){
+	old_stty_cfg=$(stty -g)
+	stty raw -echo ; answer=$(head -c 1)
+	stty $old_stty_cfg
+	echo "$answer" | grep -iq "^y"
+}
+
+update() {
+	pprint "\n\nUpdating package list.. "
+	sudo apt update &>/dev/null
+	if [ $? -eq 0 ]; then
+		pprint "UPDATE AVAILABLE\n" "cgreen"
+		pprint "Do you want to upgrade packages now? (y/n) "
+		if yesnoprompt; then
+			pprint "\nUpgrading packages.. "
+			sudo apt upgrade -y &>/dev/null &&
+			pprint "DONE!\n" "cgreen" || (pprint "FAIL.\n" "cred"; exit 1)
+		fi
+	else
+		pprint "Already up to date.\n" "cgreen"
+	fi
+}
+
+packages(){
+	if ! command -v pip &>/dev/null; then
+		pprint "Installing pip..."
+		sudo apt install python3-pip -y &>/dev/null &&
+		pprint "SUCCESS.\n" "cgreen" || (pprint "FAIL.\n" "cred"; exit 1)
+	fi
+
+	if ! command -v ffmpeg &>/dev/null; then
+		pprint "Installing ffmpeg..."
+		if sudo apt install ffmpeg -y &>/dev/null; then
+			pprint "SUCCESS.\n" "cgreen"
+		else
+			pprint "FAIL.\n" "cred"
+			pprint "Please install ffmpeg manually to run Alphabot.\n" "cblue"
+			exit 1
+		fi
+	fi
+}
+
+node(){
+	if ! command -v npm &>/dev/null; then
+		pprint "Installing Node.js & npm..."
+		curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &>/dev/null &&
+		sudo apt install -y nodejs &>/dev/null &&
+		sudo npm i -g npm &>/dev/null &&
+		pprint "SUCCESS!\n" "cgreen" || (pprint "FAIL.\n" "cred"; exit 1)
+	fi
+}
+
+installation(){
+	pprint "\nInstalling Python dependencies..."
+	pip3 install -U pip &>/dev/null &&
+	pip3 install -U -r requirements.txt &>/dev/null &&
+	pprint "DONE.\n" "cgreen" || (pprint "FAIL.\n" "cred"; exit 1)
+}
+
+clear
+pprint "Welcome to Alphabot Setup Installer\n\n"
+pprint "If you see any error, check log files:\n"
+pprint " - node logs: nodelog.txt\n"
+pprint " - python logs: pypilog.txt\n"
+sleep 1
+sudo test
+
+update
+packages
+node
+installation
+
+clear
+pprint "\n\nAlphabot Installation Completed!" "cgreen"
+sleep 1
+clear
+
+# Collecting variables
+pprint "\nEnter your configuration values for Alphabot\n\n"
+
+pprint "API ID: "; color_reset; read api_id
+pprint "API HASH: "; color_reset; read api_hash
+pprint "BOT TOKEN: "; color_reset; read bot_token
+pprint "OWNER ID: "; color_reset; read owner_id
+pprint "MONGO DB URI: "; color_reset; read mongo_db
+pprint "LOGGER ID: "; color_reset; read logger_id
+pprint "STRING SESSION: "; color_reset; read string_session
+pprint "SPOTIFY CLIENT ID: "; color_reset; read spotify_id
+pprint "SPOTIFY CLIENT SECRET: "; color_reset; read spotify_secret
+pprint "YouTube API KEY: "; color_reset; read api_key
+
+pprint "\nSaving your variables to .env file..." "cgreen"
+
+# Remove old .env if exists
+[ -f .env ] && rm .env
+
+# Create new .env
+cat <<EOL > .env
+API_ID=${api_id}
+API_HASH=${api_hash}
+BOT_TOKEN=${bot_token}
+LOGGER_ID=${logger_id}
+MONGO_DB_URI=${mongo_db}
+OWNER_ID=${owner_id}
+STRING_SESSION=${string_session}
+SPOTIFY_CLIENT_ID=${spotify_id}
+SPOTIFY_CLIENT_SECRET=${spotify_secret}
+API_KEY=${api_key}
+EOL
+
+clear
+pprint "\nYour configuration has been saved successfully! \n" "cgreen"
+pprint "You can start the bot with: bash start\n\n"
