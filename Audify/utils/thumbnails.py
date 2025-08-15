@@ -237,19 +237,15 @@ async def get_thumb(videoid: str):
             draw.ellipse([circle_position[0] - circle_radius, circle_position[1] - circle_radius,
                           circle_position[0] + circle_radius, circle_position[1] + circle_radius], fill=line_color)
 
-        draw_text_with_shadow(background, draw, (text_x_position, 400), "00:00", arial, (255, 255, 255))
-        draw_text_with_shadow(background, draw, (1080, 400), duration, arial, (255, 255, 255))
-        
+    draw_text_with_shadow(background, draw, (text_x_position, 400), "00:00", arial, (255, 255, 255))
+    draw_text_with_shadow(background, draw, (1080, 400), duration, arial, (255, 255, 255))
     play_icons = Image.open("Alphabot/assets/play_icons.png")
-        play_icons = play_icons.resize((580, 62))
-        background.paste(play_icons, (text_x_position, 450), play_icons)
-
-        os.remove(f"cache/thumb{videoid}.png")
-
-        background_path = f"cache/{videoid}_v4.png"
-        background.save(background_path)
-        
-        return background_path
+    play_icons = play_icons.resize((580, 62))
+    background.paste(play_icons, (text_x_position, 450), play_icons)
+    os.remove(f"cache/thumb{videoid}.png")
+    background_path = f"cache/{videoid}_v4.png"
+    background.save(background_path)
+    return background_path
 
     except Exception as e:
         logging.error(f"Error generating thumbnail for video {videoid}: {e}")
