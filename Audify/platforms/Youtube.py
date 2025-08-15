@@ -77,12 +77,12 @@ def api_dl(video_id: str) -> str | None:
             return None
 
     except requests.RequestException as e:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"❌ Download error for {video_id}: {e}")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"❌ Download error for {video_id}: {e}")
         return None
 
     except OSError as e:
-    from Audify.logger import LOGGER
+        from Audify.logger import LOGGER
     LOGGER(__name__).error(f"File error for {video_id}: {e}")
         return None
 
