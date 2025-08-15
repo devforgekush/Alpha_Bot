@@ -6,7 +6,7 @@ from Audify.misc import dbb, heroku
 from Audify.mongo.logs import LOG_DB
 
 from SafoneAPI import SafoneAPI
-from .logging import LOGGER
+from .logger import LOGGER
 
 dirr()
 git()

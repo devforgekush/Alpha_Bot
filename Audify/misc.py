@@ -15,7 +15,7 @@ from pyrogram import filters
 import config
 from Audify.core.mongo import mongodb
 
-from .logging import LOGGER
+from .logger import LOGGER
 
 SUDOERS = filters.user()
 
