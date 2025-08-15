@@ -30,6 +30,6 @@ for filename in os.listdir(r"./strings/langs/"):
     try:
         languages_present[language_name] = languages[language_name]["name"]
     except:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error("There is some issue with the language file inside bot.")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error("There is some issue with the language file inside bot.")
         exit()
