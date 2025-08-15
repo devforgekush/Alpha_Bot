@@ -45,8 +45,8 @@ def api_dl(video_id: str) -> str | None:
 
     # ✅ Check if already downloaded
     if os.path.exists(file_path):
-    from Audify.logger import LOGGER
-    LOGGER(__name__).info(f"Song {file_path} already exists. Skipping download ✅")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).info(f"Song {file_path} already exists. Skipping download ✅")
         return file_path
 
     try:
