@@ -182,7 +182,7 @@ async def shellrunner(_, message: Message):
                 stderr=subprocess.PIPE,
             )
         except Exception as err:
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).error(err)
             exc_type, exc_obj, exc_tb = sys.exc_info()
             errors = traceback.format_exception(

@@ -57,5 +57,5 @@ async def handle_new_members(_, message: Message):
                     disable_web_page_preview=True
                 )
             except Exception as e:
-                from Audify.logging import LOGGER
+                from Audify.logger import LOGGER
                 LOGGER(__name__).error(f"❌ Error kicking channel-linked user: {e}")

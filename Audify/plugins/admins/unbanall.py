@@ -19,7 +19,7 @@ async def unban_all(_, msg):
             banned_users.append(m.user.id)
             try:
                 await app.unban_chat_member(chat_id, banned_users[x])
-                from Audify.logging import LOGGER
+                from Audify.logger import LOGGER
                 LOGGER(__name__).info(f"🔓 Unbanning: {m.user.mention}")
                 x += 1
             except Exception:

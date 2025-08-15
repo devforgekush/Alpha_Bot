@@ -58,7 +58,7 @@ async def search_google(app, msg: Message):
     except Exception as e:
         await wait_msg.delete()
         await msg.reply_text("⚠️ Something went wrong while searching. Try again later.")
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).error(f"[ERROR - Google Search]: {e}\n{format_exc()}")
 
 

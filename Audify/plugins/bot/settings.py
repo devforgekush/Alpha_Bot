@@ -187,7 +187,7 @@ async def addition(client, CallbackQuery, _):
     current = await get_upvote_count(CallbackQuery.message.chat.id)
     if mode == "M":
         final = current - 2
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).info(final)
         if final == 0:
             return await CallbackQuery.answer(

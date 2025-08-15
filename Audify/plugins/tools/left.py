@@ -51,7 +51,7 @@ async def member_has_left(_, member: ChatMemberUpdated):
         )
 
     except RPCError as err:
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).error(f"[ERROR] RPC: {err}")
     except Exception as e:
     LOGGER(__name__).error(f"[ERROR] Unexpected: {e}")

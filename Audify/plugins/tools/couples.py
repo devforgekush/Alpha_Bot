@@ -71,7 +71,7 @@ async def ctest(_, message):
         await msg.delete()
 
     except Exception as e:
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).error(str(e))
 
 # Help section

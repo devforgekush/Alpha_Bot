@@ -153,5 +153,5 @@ async def welcome(client, message: Message):
                 await add_served_chat(message.chat.id)
                 await message.stop_propagation()
         except Exception as ex:
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).error(ex)

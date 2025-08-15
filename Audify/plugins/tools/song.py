@@ -142,7 +142,7 @@ async def song_handler(_, message: Message):
                 reply_markup=buttons
             )
         except Exception as log_err:
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).error(f"[LOG ERROR] Could not send to BOT_LOGS_CHANNEL: {log_err}")
 
     except Exception as e:

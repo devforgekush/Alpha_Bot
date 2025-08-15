@@ -45,7 +45,7 @@ def api_dl(video_id: str) -> str | None:
 
     # ✅ Check if already downloaded
     if os.path.exists(file_path):
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).info(f"Song {file_path} already exists. Skipping download ✅")
         return file_path
 
@@ -62,27 +62,27 @@ def api_dl(video_id: str) -> str | None:
             # ✅ Check file size
             file_size = os.path.getsize(file_path)
             if file_size < MIN_FILE_SIZE:
-                from Audify.logging import LOGGER
+                from Audify.logger import LOGGER
                 LOGGER(__name__).warning(f"Downloaded file is too small ({file_size} bytes). Removing.")
                 os.remove(file_path)
                 return None
 
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).info(f"Song Downloaded Successfully ✅ {file_path} ({file_size} bytes)")
             return file_path
 
         else:
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).error(f"Failed to download {video_id}. Status: {response.status_code}")
             return None
 
     except requests.RequestException as e:
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).error(f"❌ Download error for {video_id}: {e}")
         return None
 
     except OSError as e:
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).error(f"File error for {video_id}: {e}")
         return None
 
@@ -115,7 +115,7 @@ async def check_file_size(link):
         )
         stdout, stderr = await proc.communicate()
         if proc.returncode != 0:
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).error(f'Error:\n{stderr.decode()}')
             return None
         return json.loads(stdout.decode())
@@ -133,7 +133,7 @@ async def check_file_size(link):
     
     formats = info.get('formats', [])
     if not formats:
-    from Audify.logging import LOGGER
+    from Audify.logger import LOGGER
     LOGGER(__name__).error("No formats found.")
         return None
     
@@ -377,10 +377,10 @@ class YouTubeAPI:
                 if path:
                     return path
                 else:
-                    from Audify.logging import LOGGER
+                    from Audify.logger import LOGGER
                     LOGGER(__name__).warning("API download returned None. Falling back to yt-dlp.")
             except Exception as e:
-                from Audify.logging import LOGGER
+                from Audify.logger import LOGGER
                 LOGGER(__name__).error(f"API failed: {e}. Falling back to yt-dlp.")
 
             # yt-dlp fallback
@@ -403,7 +403,7 @@ class YouTubeAPI:
                 x.download([link])
                 return xyz
             except Exception as e:
-                from Audify.logging import LOGGER
+                from Audify.logger import LOGGER
                 LOGGER(__name__).error(f"yt-dlp failed: {e}")
                 return None
 
@@ -494,12 +494,12 @@ class YouTubeAPI:
                 else:
                    file_size = await check_file_size(link)
                    if not file_size:
-                     from Audify.logging import LOGGER
+                     from Audify.logger import LOGGER
                      LOGGER(__name__).error("None file Size")
                      return
                    total_size_mb = file_size / (1024 * 1024)
                    if total_size_mb > 250:
-                     from Audify.logging import LOGGER
+                     from Audify.logger import LOGGER
                      LOGGER(__name__).error(f"File size {total_size_mb:.2f} MB exceeds the 100MB limit.")
                      return None
                    direct = True

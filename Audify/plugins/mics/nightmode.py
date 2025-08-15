@@ -119,7 +119,7 @@ async def start_nightmode():
             await app.set_chat_permissions(cid, CLOSE_CHAT)
             await app.send_message(cid, "🌙 Group is now locked. Good night!")
         except Exception as e:
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).error(f"[!] Failed to lock group {cid}: {e}")
 
 # ─── Auto Unlock ───

@@ -40,7 +40,7 @@ async def unmute_all(_, msg):
             )
             count += 1
         except Exception as e:
-            from Audify.logging import LOGGER
+            from Audify.logger import LOGGER
             LOGGER(__name__).error(f"❌ Failed to unmute {member.user.id} -> {e}")
 
     await msg.reply_text(
