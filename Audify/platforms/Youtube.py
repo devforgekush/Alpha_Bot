@@ -83,7 +83,7 @@ def api_dl(video_id: str) -> str | None:
 
     except OSError as e:
         from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"File error for {video_id}: {e}")
+        LOGGER(__name__).error(f"File error for {video_id}: {e}")
         return None
 
 
