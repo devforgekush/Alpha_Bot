@@ -199,25 +199,25 @@ async def get_thumb(videoid: str):
                     circle_thumbnail = circle_thumbnail.resize((400, 400))
                     circle_position = (120, 160)
                     background.paste(circle_thumbnail, circle_position, circle_thumbnail)
+
+                    text_x_position = 565
+                    title1 = truncate(title)
+                    draw_text_with_shadow(background, draw, (text_x_position, 180), title1[0], title_font, (255, 255, 255))
+                    draw_text_with_shadow(background, draw, (text_x_position, 230), title1[1], title_font, (255, 255, 255))
+                    draw_text_with_shadow(background, draw, (text_x_position, 320), f"{channel}  |  {views[:23]}", arial, (255, 255, 255))
+
+                    line_length = 580  
+                    line_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+                    if duration != "Live":
+                        color_line_percentage = random.uniform(0.15, 0.85)
+                        color_line_length = int(line_length * color_line_percentage)
+                        white_line_length = line_length - color_line_length
+
+                        start_point_color = (text_x_position, 380)
                 except Exception as e:
                     logging.error(f"Error in font loading or thumbnail generation: {e}")
                     return None
-
-                text_x_position = 565
-                title1 = truncate(title)
-                draw_text_with_shadow(background, draw, (text_x_position, 180), title1[0], title_font, (255, 255, 255))
-                draw_text_with_shadow(background, draw, (text_x_position, 230), title1[1], title_font, (255, 255, 255))
-                draw_text_with_shadow(background, draw, (text_x_position, 320), f"{channel}  |  {views[:23]}", arial, (255, 255, 255))
-
-                line_length = 580  
-                line_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-
-                if duration != "Live":
-                    color_line_percentage = random.uniform(0.15, 0.85)
-                    color_line_length = int(line_length * color_line_percentage)
-                    white_line_length = line_length - color_line_length
-
-                    start_point_color = (text_x_position, 380)
             except Exception as e:
                 logging.error(f"Error in get_thumb: {e}")
                 return None
