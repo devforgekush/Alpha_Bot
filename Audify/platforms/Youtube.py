@@ -133,8 +133,8 @@ async def check_file_size(link):
     
     formats = info.get('formats', [])
     if not formats:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error("No formats found.")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error("No formats found.")
         return None
     
     total_size = parse_size(formats)
