@@ -17,7 +17,7 @@ import config
 from ..logger import LOGGER
 
 
-class Audify(Client):
+class Alphabot(Client):
     def __init__(self):
         LOGGER(__name__).info(f"🚀 Initializing Audify Bot...")
         super().__init__(
