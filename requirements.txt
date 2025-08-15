@@ -4,7 +4,6 @@ aiofiles>=23.2.1
 aiohttp>=3.9.5
 apscheduler>=3.10.4
 asyncio>=3.4.3
-bard>=0.2.0
 beautifulsoup4>=4.12.3
 cloudscraper>=1.2.69
 daxxhub>=1.0.0
