@@ -5,7 +5,12 @@ from typing import Union
 
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
-from ntgcalls import TelegramServerError
+try:
+    from ntgcalls import TelegramServerError
+    NTGCALLS_AVAILABLE = True
+except Exception:
+    TelegramServerError = Exception
+    NTGCALLS_AVAILABLE = False
 # Try to import pytgcalls, make it optional
 try:
     from pytgcalls import PyTgCalls
