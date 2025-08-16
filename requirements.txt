@@ -1,6 +1,9 @@
 # Core dependencies with fixed versions to avoid conflicts
+# pytgcalls provides voice support. We avoid pinning `tgcalls` strictly because
+# versions on PyPI may vary; let pip resolve a compatible backend or install
+# a specific tgcalls version only if needed.
 pytgcalls==2.1.0
-tgcalls==2.0.0
+# tgcalls==2.0.0  # removed strict pin — not available on PyPI (caused build errors)
 aiofiles==23.2.1
 aiohttp==3.9.5
 apscheduler==3.10.4
