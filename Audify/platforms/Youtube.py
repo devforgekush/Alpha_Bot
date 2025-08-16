@@ -15,7 +15,7 @@ import yt_dlp
 
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
-from youtubesearchpython.__future__ import VideosSearch
+
 
 from Audify.utils.database import is_on_off
 from Audify.utils.formatters import time_to_seconds
@@ -29,6 +29,31 @@ import time
 from config import API_BASE_URL
 
 MIN_FILE_SIZE = 51200
+
+# Compatibility shim: some httpx versions changed AsyncClient signature and do not
+# accept the `proxies` kwarg used by youtubesearchpython. Patch AsyncClient at
+# runtime to silently drop unknown `proxies` kwarg so the search package works
+# with multiple httpx versions without requiring environment reinstallation.
+try:
+    import httpx as _httpx
+    _orig_async_init = getattr(_httpx.AsyncClient, "__init__", None)
+
+    if _orig_async_init is not None:
+        def _patched_asyncclient_init(self, *args, **kwargs):
+            # Drop `proxies` if provided by downstream libraries that expect it
+            kwargs.pop("proxies", None)
+            return _orig_async_init(self, *args, **kwargs)
+
+        # Replace only if not already patched
+        if getattr(_httpx.AsyncClient, "__init__", None) is _orig_async_init:
+            _httpx.AsyncClient.__init__ = _patched_asyncclient_init
+except Exception:
+    # Best-effort shim; failures here are non-fatal and will be logged elsewhere
+    pass
+
+# Import VideosSearch after applying the httpx shim so the search package
+# sees the patched AsyncClient signature.
+from youtubesearchpython.__future__ import VideosSearch
 
 def extract_video_id(link: str) -> str:
     patterns = [
@@ -72,7 +97,13 @@ async def api_dl(link: str) -> str | None:
 
         if download_response.status_code != 200:
             from Audify.logger import LOGGER
-            LOGGER(__name__).error(f"Failed to start download. Status: {download_response.status_code}")
+            from Audify.logger import LOGGER
+            # Log response body for debugging
+            try:
+                body = download_response.text
+            except Exception:
+                body = '<unreadable body>'
+            LOGGER(__name__).error(f"Failed to start download. Status: {download_response.status_code} - {body}")
             return await fallback_dl(link)
 
         task_id = download_response.json().get("task_id")
@@ -100,9 +131,9 @@ async def api_dl(link: str) -> str | None:
                         file_size = os.path.getsize(file_path)
                         if file_size < MIN_FILE_SIZE:
                             from Audify.logger import LOGGER
-                            LOGGER(__name__).warning(f"Downloaded file is too small ({file_size} bytes). Removing.")
-                            os.remove(file_path)
-                            return None
+                            LOGGER(__name__).warning(f"Downloaded file is too small ({file_size} bytes). Keeping file for inspection.")
+                            # Keep the file for debugging instead of removing it immediately
+                            return file_path
 
                         from Audify.logger import LOGGER
                         LOGGER(__name__).info(f"Song Downloaded Successfully via API ✅ {file_path} ({file_size} bytes)")
@@ -156,6 +187,8 @@ async def fallback_dl(link: str) -> str | None:
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
+            # Keep original downloaded file for debugging (-k)
+            'keepvideo': True,
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -231,25 +264,41 @@ async def fallback_get_info(link: str) -> dict | None:
 
 
 def cookie_txt_file():
-    folder_path = f"{os.getcwd()}/cookies"
-    filename = f"{os.getcwd()}/cookies/logs.csv"
-    txt_files = glob.glob(os.path.join(folder_path, '*.txt'))
+    # Use os.path to be platform-independent and ensure the cookies folder exists
+    folder_path = os.path.join(os.getcwd(), "cookies")
+    os.makedirs(folder_path, exist_ok=True)
+    logs_path = os.path.join(folder_path, "logs.csv")
+
+    txt_files = glob.glob(os.path.join(folder_path, "*.txt"))
     if not txt_files:
-        raise FileNotFoundError("No .txt files found in the specified folder.")
-    cookie_txt_file = random.choice(txt_files)
-    with open(filename, 'a') as file:
-        file.write(f'Choosen File : {cookie_txt_file}\n')
-    return f"""cookies/{str(cookie_txt_file).split("/")[-1]}"""
+        # No cookie files available — log and return None so callers can fall back
+        from Audify.logger import LOGGER
+        LOGGER(__name__).warning("No cookie .txt files found in cookies/; continuing without cookies")
+        return None
+
+    chosen = random.choice(txt_files)
+    # Record which cookie file was chosen for debugging
+    try:
+        with open(logs_path, "a", encoding="utf-8") as file:
+            file.write(f"Chosen cookie file: {chosen}\n")
+    except Exception:
+        pass
+
+    # Return absolute path (yt-dlp accepts this directly)
+    return os.path.abspath(chosen)
 
 
 
-async def check_file_size(link):
+    async def check_file_size(link):
     async def get_format_info(link):
+        # Build command arguments safely and include cookies only if available
+        c = cookie_txt_file()
+        args = ["yt-dlp"]
+        if c:
+            args += ["--cookies", c]
+        args += ["-J", link]
         proc = await asyncio.create_subprocess_exec(
-            "yt-dlp",
-            "--cookies", cookie_txt_file(),
-            "-J",
-            link,
+            *args,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE
         )
@@ -387,13 +436,14 @@ class YouTubeAPI:
             link = self.base + link
         if "&" in link:
             link = link.split("&")[0]
+        # Build command arguments safely and include cookies only if available
+        c = cookie_txt_file()
+        args = ["yt-dlp"]
+        if c:
+            args += ["--cookies", c]
+        args += ["-g", "-f", "best[height<=?720][width<=?1280]", f"{link}"]
         proc = await asyncio.create_subprocess_exec(
-            "yt-dlp",
-            "--cookies",cookie_txt_file(),
-            "-g",
-            "-f",
-            "best[height<=?720][width<=?1280]",
-            f"{link}",
+            *args,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
@@ -409,7 +459,7 @@ class YouTubeAPI:
         if "&" in link:
             link = link.split("&")[0]
         playlist = await shell_cmd(
-            f"yt-dlp -i --get-id --flat-playlist --cookies {cookie_txt_file()} --playlist-end {limit} --skip-download {link}"
+            (lambda: (f"yt-dlp -i --get-id --flat-playlist --cookies {c} --playlist-end {limit} --skip-download {link}") if (c:=cookie_txt_file()) else f"yt-dlp -i --get-id --flat-playlist --playlist-end {limit} --skip-download {link}")() 
         )
         try:
             result = playlist.split("\n")
@@ -446,7 +496,10 @@ class YouTubeAPI:
             link = self.base + link
         if "&" in link:
             link = link.split("&")[0]
-        ytdl_opts = {"quiet": True, "cookiefile" : cookie_txt_file()}
+        c = cookie_txt_file()
+        ytdl_opts = {"quiet": True}
+        if c:
+            ytdl_opts["cookiefile"] = c
         ydl = yt_dlp.YoutubeDL(ytdl_opts)
         with ydl:
             formats_available = []
@@ -515,7 +568,11 @@ class YouTubeAPI:
                 sexid = extract_video_id(link)
                 # api_dl is async; run it synchronously here because this function
                 # executes inside a thread via run_in_executor
-                path = asyncio.run(api_dl(sexid))
+                # Pass the original link to api_dl (not the extracted id).
+                # Passing only the id caused extract_video_id inside api_dl to fail.
+                from Audify.logger import LOGGER
+                LOGGER(__name__).debug(f"Attempting API download for link: {link} (id: {sexid})")
+                path = asyncio.run(api_dl(link))
                 if path:
                     return path
                 else:
@@ -532,7 +589,7 @@ class YouTubeAPI:
                 "geo_bypass": True,
                 "nocheckcertificate": True,
                 "quiet": True,
-                "cookiefile": cookie_txt_file(),
+                **({"cookiefile": cookie_txt_file()} if cookie_txt_file() else {}),
                 "no_warnings": True,
             }
 
@@ -556,7 +613,7 @@ class YouTubeAPI:
                 "geo_bypass": True,
                 "nocheckcertificate": True,
                 "quiet": True,
-                "cookiefile" : cookie_txt_file(),
+                **({"cookiefile": cookie_txt_file()} if cookie_txt_file() else {}),
                 "no_warnings": True,
             }
             x = yt_dlp.YoutubeDL(ydl_optssx)
@@ -577,7 +634,7 @@ class YouTubeAPI:
                 "nocheckcertificate": True,
                 "quiet": True,
                 "no_warnings": True,
-                "cookiefile" : cookie_txt_file(),
+                **({"cookiefile": cookie_txt_file()} if cookie_txt_file() else {}),
                 "prefer_ffmpeg": True,
                 "merge_output_format": "mp4",
             }
@@ -593,7 +650,7 @@ class YouTubeAPI:
                 "nocheckcertificate": True,
                 "quiet": True,
                 "no_warnings": True,
-                "cookiefile" : cookie_txt_file(),
+                **({"cookiefile": cookie_txt_file()} if cookie_txt_file() else {}),
                 "prefer_ffmpeg": True,
                 "postprocessors": [
                     {
@@ -619,13 +676,14 @@ class YouTubeAPI:
                 direct = True
                 downloaded_file = await loop.run_in_executor(None, video_dl)
             else:
+                # Build command arguments safely and include cookies only if available
+                c = cookie_txt_file()
+                args = ["yt-dlp"]
+                if c:
+                    args += ["--cookies", c]
+                args += ["-g", "-f", "best[height<=?720][width<=?1280]", f"{link}"]
                 proc = await asyncio.create_subprocess_exec(
-                    "yt-dlp",
-                    "--cookies",cookie_txt_file(),
-                    "-g",
-                    "-f",
-                    "best[height<=?720][width<=?1280]",
-                    f"{link}",
+                    *args,
                     stdout=asyncio.subprocess.PIPE,
                     stderr=asyncio.subprocess.PIPE,
                 )

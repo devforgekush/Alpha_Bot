@@ -160,7 +160,11 @@ async def play_commnd(
                         config.PLAYLIST_FETCH_LIMIT,
                         message.from_user.id,
                     )
-                except:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in YouTube.playlist for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "playlist"
                 plist_type = "yt"
@@ -173,7 +177,11 @@ async def play_commnd(
             else:
                 try:
                     details, track_id = await YouTube.track(url)
-                except:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in YouTube.track for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "youtube"
                 img = details["thumb"]
@@ -190,7 +198,11 @@ async def play_commnd(
             if "track" in url:
                 try:
                     details, track_id = await Spotify.track(url)
-                except:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in Spotify.track for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "youtube"
                 img = details["thumb"]
@@ -198,7 +210,11 @@ async def play_commnd(
             elif "playlist" in url:
                 try:
                     details, plist_id = await Spotify.playlist(url)
-                except Exception:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in Spotify.playlist for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "playlist"
                 plist_type = "spplay"
@@ -207,7 +223,11 @@ async def play_commnd(
             elif "album" in url:
                 try:
                     details, plist_id = await Spotify.album(url)
-                except:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in Spotify.album for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "playlist"
                 plist_type = "spalbum"
@@ -216,7 +236,11 @@ async def play_commnd(
             elif "artist" in url:
                 try:
                     details, plist_id = await Spotify.artist(url)
-                except:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in Spotify.artist for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "playlist"
                 plist_type = "spartist"
@@ -228,7 +252,11 @@ async def play_commnd(
             if "album" in url:
                 try:
                     details, track_id = await Apple.track(url)
-                except:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in Apple.track for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "youtube"
                 img = details["thumb"]
@@ -237,7 +265,11 @@ async def play_commnd(
                 spotify = True
                 try:
                     details, plist_id = await Apple.playlist(url)
-                except:
+                except Exception as e:
+                    from Audify.logger import LOGGER
+                    import traceback
+                    LOGGER(__name__).error(f"Error in Apple.playlist for url '{url}': {type(e).__name__} {e}")
+                    LOGGER(__name__).error(traceback.format_exc())
                     return await mystic.edit_text(_["play_3"])
                 streamtype = "playlist"
                 plist_type = "apple"
@@ -256,7 +288,11 @@ async def play_commnd(
         elif await SoundCloud.valid(url):
             try:
                 details, track_path = await SoundCloud.download(url)
-            except:
+            except Exception as e:
+                from Audify.logger import LOGGER
+                import traceback
+                LOGGER(__name__).error(f"Error in SoundCloud.download for url '{url}': {type(e).__name__} {e}")
+                LOGGER(__name__).error(traceback.format_exc())
                 return await mystic.edit_text(_["play_3"])
             duration_sec = details["duration_sec"]
             if duration_sec > config.DURATION_LIMIT:
@@ -326,7 +362,12 @@ async def play_commnd(
             query = query.replace("-v", "")
         try:
             details, track_id = await YouTube.track(query)
-        except:
+        except Exception as e:
+            # Log the exception so we can diagnose why track lookup failed
+            from Audify.logger import LOGGER
+            import traceback
+            LOGGER(__name__).error(f"Error in YouTube.track for query '{query}': {type(e).__name__} {e}")
+            LOGGER(__name__).error(traceback.format_exc())
             return await mystic.edit_text(_["play_3"])
         streamtype = "youtube"
     if str(playmode) == "Direct":

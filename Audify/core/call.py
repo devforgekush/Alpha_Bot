@@ -318,18 +318,23 @@ class Call(PyTgCalls):
         image: Union[bool, str] = None,
     ):
         assistant = await group_assistant(self, chat_id)
-        if video:
-            stream = MediaStream(
-                link,
-                audio_parameters=AudioQuality.HIGH,
-                video_parameters=VideoQuality.SD_480p,
-            )
-        else:
-            stream = MediaStream(
-                link,
-                audio_parameters=AudioQuality.HIGH,
-                video_flags=MediaStream.IGNORE,
-            )
+            if video:
+                stream = MediaStream(
+                    link,
+                    audio_parameters=AudioQuality.HIGH,
+                    video_parameters=VideoQuality.SD_480p,
+                )
+            else:
+                # Wrap audio sources in AudioPiped to ensure ffmpeg is used
+                try:
+                    src = AudioPiped(link)
+                except Exception:
+                    src = link
+                stream = MediaStream(
+                    src,
+                    audio_parameters=AudioQuality.HIGH,
+                    video_flags=MediaStream.IGNORE,
+                )
         await assistant.change_stream(
             chat_id,
             stream,
@@ -374,25 +379,34 @@ class Call(PyTgCalls):
         assistant = await group_assistant(self, chat_id)
         language = await get_lang(chat_id)
         _ = get_string(language)
+        # Prefer piping audio through ffmpeg (AudioPiped) for reliable playback
+        # This supports both direct media URLs and local files. Video continues
+        # to use MediaStream directly.
+        try:
+            is_url = isinstance(link, str) and link.startswith(("http://", "https://"))
+        except Exception:
+            is_url = False
+
         if video:
+            # Video streams use MediaStream with video parameters
             stream = MediaStream(
                 link,
                 audio_parameters=AudioQuality.HIGH,
                 video_parameters=VideoQuality.SD_480p,
             )
         else:
-            stream = (
-                MediaStream(
-                    link,
-                    audio_parameters=AudioQuality.HIGH,
-                    video_parameters=VideoQuality.SD_480p,
-                )
-                if video
-                else MediaStream(
-                    link,
-                    audio_parameters=AudioQuality.HIGH,
-                    video_flags=MediaStream.IGNORE,
-                )
+            # For audio-only, wrap the source with AudioPiped so pytgcalls
+            # spawns ffmpeg reliably (handles URLs and local files)
+            try:
+                source = AudioPiped(link)
+            except Exception:
+                # Fallback to raw link/path if AudioPiped cannot be created
+                source = link
+
+            stream = MediaStream(
+                source,
+                audio_parameters=AudioQuality.HIGH,
+                video_flags=MediaStream.IGNORE,
             )
         try:
             await assistant.join_group_call(
@@ -467,8 +481,12 @@ class Call(PyTgCalls):
                         video_parameters=VideoQuality.SD_480p,
                     )
                 else:
+                    try:
+                        src = AudioPiped(link)
+                    except Exception:
+                        src = link
                     stream = MediaStream(
-                        link,
+                        src,
                         audio_parameters=AudioQuality.HIGH,
                         video_flags=MediaStream.IGNORE,
                     )
@@ -514,8 +532,12 @@ class Call(PyTgCalls):
                         video_parameters=VideoQuality.SD_480p,
                     )
                 else:
+                    try:
+                        src = AudioPiped(file_path)
+                    except Exception:
+                        src = file_path
                     stream = MediaStream(
-                        file_path,
+                        src,
                         audio_parameters=AudioQuality.HIGH,
                         video_flags=MediaStream.IGNORE,
                     )
@@ -550,10 +572,12 @@ class Call(PyTgCalls):
                         video_parameters=VideoQuality.SD_480p,
                     )
                     if str(streamtype) == "video"
-                    else MediaStream(
-                        videoid,
-                        audio_parameters=AudioQuality.HIGH,
-                        video_flags=MediaStream.IGNORE,
+                    else (
+                        MediaStream(
+                            AudioPiped(videoid) if (lambda v: True)(videoid) else videoid,
+                            audio_parameters=AudioQuality.HIGH,
+                            video_flags=MediaStream.IGNORE,
+                        )
                     )
                 )
                 try:
@@ -580,8 +604,12 @@ class Call(PyTgCalls):
                         video_parameters=VideoQuality.SD_480p,
                     )
                 else:
+                    try:
+                        src = AudioPiped(queued)
+                    except Exception:
+                        src = queued
                     stream = MediaStream(
-                        queued,
+                        src,
                         audio_parameters=AudioQuality.HIGH,
                         video_flags=MediaStream.IGNORE,
                     )

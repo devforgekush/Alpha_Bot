@@ -118,6 +118,12 @@ async def set_assistant_new(chat_id, number):
 
 async def set_assistant(chat_id):
     from Audify.core.userbot import assistants
+    # If no assistant sessions are configured, return None so callers can
+    # handle the missing assistant gracefully instead of raising IndexError.
+    if not assistants:
+        from ..logger import LOGGER
+        LOGGER(__name__).warning("No assistant sessions configured (assistants list is empty)")
+        return None
 
     ran_assistant = random.choice(assistants)
     assistantdict[chat_id] = ran_assistant
@@ -159,6 +165,11 @@ async def get_assistant(chat_id: int) -> str:
 
 async def set_calls_assistant(chat_id):
     from Audify.core.userbot import assistants
+    # Guard empty assistants list
+    if not assistants:
+        from ..logger import LOGGER
+        LOGGER(__name__).warning("No assistant sessions configured (assistants list is empty)")
+        return None
 
     ran_assistant = random.choice(assistants)
     assistantdict[chat_id] = ran_assistant

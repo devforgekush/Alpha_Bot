@@ -115,3 +115,431 @@
 [16-Aug-25 23:08:53 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
 [16-Aug-25 23:08:53 - INFO] - AutoLeave - AutoLeave task started and running in background.
 [16-Aug-25 23:08:53 - INFO] - AutoLeave - Sleeping for 5h 26m until 4:35 AM IST.
+[16-Aug-25 23:31:40 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:31:40 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:31:40 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:31:40 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:31:40 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:31:40 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:31:41 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:31:41 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[16-Aug-25 23:31:41 - INFO] - Audify.__main__ - ℹ️ RAILWAY_URL not set, pinger disabled
+[16-Aug-25 23:31:41 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[16-Aug-25 23:31:43 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[16-Aug-25 23:31:51 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002723963783
+➡️ Reason: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:31:51 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[16-Aug-25 23:31:51 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002723963783: ValueError
+[16-Aug-25 23:31:51 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[16-Aug-25 23:31:53 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[16-Aug-25 23:31:53 - INFO] - Audify.core.userbot - Starting Assistants...
+[16-Aug-25 23:31:53 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:31:53 - INFO] - AutoLeave - Sleeping for 5h 3m until 4:35 AM IST.
+[16-Aug-25 23:31:56 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002723963783: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:31:56 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[16-Aug-25 23:31:56 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[16-Aug-25 23:31:56 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[16-Aug-25 23:31:56 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[16-Aug-25 23:31:56 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[16-Aug-25 23:36:54 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:36:54 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:36:54 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:36:54 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:36:54 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:36:54 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:36:55 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:36:55 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[16-Aug-25 23:36:55 - INFO] - Audify.__main__ - ℹ️ RAILWAY_URL not set, pinger disabled
+[16-Aug-25 23:36:55 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[16-Aug-25 23:36:58 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[16-Aug-25 23:37:05 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002723963783
+➡️ Reason: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:37:05 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[16-Aug-25 23:37:05 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002723963783: ValueError
+[16-Aug-25 23:37:05 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[16-Aug-25 23:37:07 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[16-Aug-25 23:37:07 - INFO] - Audify.core.userbot - Starting Assistants...
+[16-Aug-25 23:37:07 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:37:08 - INFO] - AutoLeave - Sleeping for 4h 57m until 4:35 AM IST.
+[16-Aug-25 23:37:09 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002723963783: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:37:09 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[16-Aug-25 23:37:09 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[16-Aug-25 23:37:09 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[16-Aug-25 23:37:09 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[16-Aug-25 23:37:09 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[16-Aug-25 23:37:31 - ERROR] - Audify.plugins.play.play - Error in YouTube.track for query 'u know me': TypeError AsyncClient.__init__() got an unexpected keyword argument 'proxies'
+[16-Aug-25 23:37:31 - ERROR] - Audify.plugins.play.play - Traceback (most recent call last):
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\plugins\play\play.py", line 364, in play_commnd
+    details, track_id = await YouTube.track(query)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\platforms\Youtube.py", line 429, in track
+    for result in (await results.next())["result"]:
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\__future__\search.py", line 153, in next
+    return await self._nextAsync()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\search.py", line 103, in _nextAsync
+    await self._makeAsyncRequest()
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\search.py", line 59, in _makeAsyncRequest
+    request = await self.asyncPostRequest()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\requests.py", line 29, in asyncPostRequest
+    async with httpx.AsyncClient(proxies=self.proxy) as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AsyncClient.__init__() got an unexpected keyword argument 'proxies'
+
+[16-Aug-25 23:38:38 - ERROR] - Audify.plugins.play.play - Error in YouTube.track for query 'me': TypeError AsyncClient.__init__() got an unexpected keyword argument 'proxies'
+[16-Aug-25 23:38:38 - ERROR] - Audify.plugins.play.play - Traceback (most recent call last):
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\plugins\play\play.py", line 364, in play_commnd
+    details, track_id = await YouTube.track(query)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\platforms\Youtube.py", line 429, in track
+    for result in (await results.next())["result"]:
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\__future__\search.py", line 153, in next
+    return await self._nextAsync()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\search.py", line 103, in _nextAsync
+    await self._makeAsyncRequest()
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\search.py", line 59, in _makeAsyncRequest
+    request = await self.asyncPostRequest()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\requests.py", line 29, in asyncPostRequest
+    async with httpx.AsyncClient(proxies=self.proxy) as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AsyncClient.__init__() got an unexpected keyword argument 'proxies'
+
+[16-Aug-25 23:39:01 - ERROR] - Audify.plugins.play.play - Error in YouTube.track for url 'https://music.youtube.com/watch?v=7iy8iB8tu5c&si=iuherglT3D1egxoj': TypeError AsyncClient.__init__() got an unexpected keyword argument 'proxies'
+[16-Aug-25 23:39:01 - ERROR] - Audify.plugins.play.play - Traceback (most recent call last):
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\plugins\play\play.py", line 179, in play_commnd
+    details, track_id = await YouTube.track(url)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\platforms\Youtube.py", line 429, in track
+    for result in (await results.next())["result"]:
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\__future__\search.py", line 153, in next
+    return await self._nextAsync()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\search.py", line 103, in _nextAsync
+    await self._makeAsyncRequest()
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\search.py", line 59, in _makeAsyncRequest
+    request = await self.asyncPostRequest()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\youtubesearchpython\core\requests.py", line 29, in asyncPostRequest
+    async with httpx.AsyncClient(proxies=self.proxy) as client:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AsyncClient.__init__() got an unexpected keyword argument 'proxies'
+
+[16-Aug-25 23:41:43 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:41:43 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:41:43 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:41:43 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:41:43 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:41:43 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:41:44 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:41:44 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[16-Aug-25 23:41:44 - INFO] - Audify.__main__ - ℹ️ RAILWAY_URL not set, pinger disabled
+[16-Aug-25 23:41:44 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[16-Aug-25 23:41:46 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[16-Aug-25 23:41:54 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002723963783
+➡️ Reason: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:41:54 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[16-Aug-25 23:41:54 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002723963783: ValueError
+[16-Aug-25 23:41:54 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[16-Aug-25 23:41:56 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[16-Aug-25 23:41:56 - INFO] - Audify.core.userbot - Starting Assistants...
+[16-Aug-25 23:41:56 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:41:56 - INFO] - AutoLeave - Sleeping for 4h 53m until 4:35 AM IST.
+[16-Aug-25 23:41:57 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002723963783: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:41:57 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[16-Aug-25 23:41:57 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[16-Aug-25 23:41:57 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[16-Aug-25 23:41:57 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[16-Aug-25 23:41:57 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[16-Aug-25 23:43:13 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:43:13 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:43:13 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:43:13 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:43:13 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:43:13 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:43:14 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:43:14 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[16-Aug-25 23:43:14 - INFO] - Audify.__main__ - ℹ️ RAILWAY_URL not set, pinger disabled
+[16-Aug-25 23:43:14 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[16-Aug-25 23:43:17 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[16-Aug-25 23:43:24 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002723963783
+➡️ Reason: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:43:24 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[16-Aug-25 23:43:24 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002723963783: ValueError
+[16-Aug-25 23:43:24 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[16-Aug-25 23:43:26 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[16-Aug-25 23:43:26 - INFO] - Audify.core.userbot - Starting Assistants...
+[16-Aug-25 23:43:26 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:43:26 - INFO] - AutoLeave - Sleeping for 4h 51m until 4:35 AM IST.
+[16-Aug-25 23:43:28 - ERROR] - pyrogram.dispatcher - Cannot choose from an empty sequence
+Traceback (most recent call last):
+  File "C:\Users\kusha\AppData\Roaming\Python\Python312\site-packages\pyrogram\dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\utils\decorators\play.py", line 117, in wrapper
+    userbot = await get_assistant(chat_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\utils\database.py", line 149, in get_assistant
+    userbot = await set_assistant(chat_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kusha\Desktop\ALPHA_BOTV2 WITH API\Audify\utils\database.py", line 122, in set_assistant
+    ran_assistant = random.choice(assistants)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\random.py", line 347, in choice
+    raise IndexError('Cannot choose from an empty sequence')
+IndexError: Cannot choose from an empty sequence
+[16-Aug-25 23:43:28 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002723963783: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:43:28 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[16-Aug-25 23:43:28 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[16-Aug-25 23:43:28 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[16-Aug-25 23:43:28 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[16-Aug-25 23:43:28 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[16-Aug-25 23:44:25 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[16-Aug-25 23:44:25 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[16-Aug-25 23:44:25 - ERROR] - Audify.platforms.Youtube - ❌ Fallback download error: Invalid YouTube link provided.
+[16-Aug-25 23:44:25 - WARNING] - Audify.platforms.Youtube - API download returned None. Falling back to yt-dlp.
+[16-Aug-25 23:45:11 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:45:11 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:45:11 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:45:11 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:45:11 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:45:11 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:45:12 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:45:12 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[16-Aug-25 23:45:12 - INFO] - Audify.__main__ - ℹ️ RAILWAY_URL not set, pinger disabled
+[16-Aug-25 23:45:12 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[16-Aug-25 23:45:14 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[16-Aug-25 23:45:21 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002723963783
+➡️ Reason: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:45:21 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[16-Aug-25 23:45:21 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002723963783: ValueError
+[16-Aug-25 23:45:21 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[16-Aug-25 23:45:23 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[16-Aug-25 23:45:23 - INFO] - Audify.core.userbot - Starting Assistants...
+[16-Aug-25 23:45:23 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:45:23 - INFO] - AutoLeave - Sleeping for 4h 49m until 4:35 AM IST.
+[16-Aug-25 23:45:24 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002723963783: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:45:24 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[16-Aug-25 23:45:24 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[16-Aug-25 23:45:24 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[16-Aug-25 23:45:24 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[16-Aug-25 23:45:24 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[16-Aug-25 23:45:29 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[16-Aug-25 23:45:29 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[16-Aug-25 23:45:29 - ERROR] - Audify.platforms.Youtube - ❌ Fallback download error: Invalid YouTube link provided.
+[16-Aug-25 23:45:29 - WARNING] - Audify.platforms.Youtube - API download returned None. Falling back to yt-dlp.
+[16-Aug-25 23:52:07 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:52:07 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:52:07 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:52:07 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:52:07 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:52:07 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:52:41 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:52:41 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:52:41 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:52:41 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:52:41 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:52:41 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:52:41 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:52:41 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[16-Aug-25 23:52:41 - INFO] - Audify.__main__ - ℹ️ RAILWAY_URL not set, pinger disabled
+[16-Aug-25 23:52:41 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[16-Aug-25 23:52:44 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[16-Aug-25 23:52:51 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002723963783
+➡️ Reason: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:52:51 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[16-Aug-25 23:52:51 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002723963783: ValueError
+[16-Aug-25 23:52:51 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[16-Aug-25 23:52:53 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[16-Aug-25 23:52:53 - INFO] - Audify.core.userbot - Starting Assistants...
+[16-Aug-25 23:52:53 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:52:54 - INFO] - AutoLeave - Sleeping for 4h 42m until 4:35 AM IST.
+[16-Aug-25 23:52:54 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002723963783: ValueError - Peer id invalid: -1002723963783
+[16-Aug-25 23:52:54 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[16-Aug-25 23:52:54 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[16-Aug-25 23:52:54 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[16-Aug-25 23:52:54 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[16-Aug-25 23:52:54 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[16-Aug-25 23:53:14 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[16-Aug-25 23:53:14 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[16-Aug-25 23:53:23 - WARNING] - Audify.platforms.Youtube - API download returned None. Falling back to yt-dlp.
+[16-Aug-25 23:54:02 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[16-Aug-25 23:54:02 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[16-Aug-25 23:54:08 - WARNING] - Audify.platforms.Youtube - API download returned None. Falling back to yt-dlp.
+[16-Aug-25 23:54:43 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:54:43 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:54:43 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:54:43 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:55:38 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:55:38 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:55:38 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:55:38 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:57:02 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:57:02 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:57:02 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:57:02 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:57:02 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:57:02 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:57:03 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:57:03 - ERROR] - Audify.__main__ - 🚫 String Session Missing! Please configure at least one Pyrogram session string.
+[16-Aug-25 23:57:03 - WARNING] - Audify.__main__ - ⚠️ Bot will continue running but may have limited functionality
+[16-Aug-25 23:57:03 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[16-Aug-25 23:57:03 - INFO] - Audify.__main__ - ℹ️ RAILWAY_URL not set, pinger disabled
+[16-Aug-25 23:57:03 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[17-Aug-25 00:04:33 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[17-Aug-25 00:04:33 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[17-Aug-25 00:04:33 - INFO] - Audify.core.dir - Directories Updated.
+[17-Aug-25 00:04:33 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[17-Aug-25 00:04:33 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[17-Aug-25 00:04:33 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[17-Aug-25 00:04:34 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[17-Aug-25 00:04:34 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[17-Aug-25 00:04:34 - INFO] - Audify.__main__ - 🚀 Starting pinger for: https://worker-production-1af23.up.railway.app
+[17-Aug-25 00:04:34 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[17-Aug-25 00:04:36 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[17-Aug-25 00:04:38 - WARNING] - Audify.__main__ - ⚠️ Pinger: Unexpected status 502 (failures=1)
+[17-Aug-25 00:04:43 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002511251392
+➡️ Reason: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:04:43 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[17-Aug-25 00:04:43 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002511251392: ValueError
+[17-Aug-25 00:04:43 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[17-Aug-25 00:04:45 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[17-Aug-25 00:04:45 - INFO] - Audify.core.userbot - Starting Assistants...
+[17-Aug-25 00:04:45 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[17-Aug-25 00:04:45 - INFO] - AutoLeave - Sleeping for 4h 30m until 4:35 AM IST.
+[17-Aug-25 00:04:46 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002511251392: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:04:46 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[17-Aug-25 00:04:46 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[17-Aug-25 00:04:46 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[17-Aug-25 00:04:46 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[17-Aug-25 00:04:46 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[17-Aug-25 00:05:15 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[17-Aug-25 00:05:15 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[17-Aug-25 00:05:19 - WARNING] - Audify.platforms.Youtube - API download returned None. Falling back to yt-dlp.
+[17-Aug-25 00:07:52 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[17-Aug-25 00:07:52 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[17-Aug-25 00:07:52 - INFO] - Audify.core.dir - Directories Updated.
+[17-Aug-25 00:07:52 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[17-Aug-25 00:07:52 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[17-Aug-25 00:07:52 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[17-Aug-25 00:07:53 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[17-Aug-25 00:07:53 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[17-Aug-25 00:07:53 - INFO] - Audify.__main__ - 🚀 Starting pinger for: https://worker-production-1af23.up.railway.app
+[17-Aug-25 00:07:53 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[17-Aug-25 00:07:59 - WARNING] - Audify.__main__ - ⚠️ Pinger: Unexpected status 502 (failures=1)
+[17-Aug-25 00:08:03 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[17-Aug-25 00:08:11 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002511251392
+➡️ Reason: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:08:11 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[17-Aug-25 00:08:11 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002511251392: ValueError
+[17-Aug-25 00:08:11 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[17-Aug-25 00:08:13 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[17-Aug-25 00:08:13 - INFO] - Audify.core.userbot - Starting Assistants...
+[17-Aug-25 00:08:13 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[17-Aug-25 00:08:13 - INFO] - AutoLeave - Sleeping for 4h 26m until 4:35 AM IST.
+[17-Aug-25 00:08:14 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002511251392: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:08:14 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[17-Aug-25 00:08:14 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[17-Aug-25 00:08:14 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[17-Aug-25 00:08:14 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[17-Aug-25 00:08:14 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[17-Aug-25 00:08:24 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[17-Aug-25 00:08:24 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[17-Aug-25 00:09:28 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[17-Aug-25 00:09:28 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[17-Aug-25 00:18:28 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[17-Aug-25 00:18:28 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[17-Aug-25 00:18:28 - INFO] - Audify.core.dir - Directories Updated.
+[17-Aug-25 00:18:28 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[17-Aug-25 00:18:28 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[17-Aug-25 00:18:28 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[17-Aug-25 00:18:29 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[17-Aug-25 00:18:29 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[17-Aug-25 00:18:29 - INFO] - Audify.__main__ - 🚀 Starting pinger for: https://worker-production-1af23.up.railway.app
+[17-Aug-25 00:18:29 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[17-Aug-25 00:18:31 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[17-Aug-25 00:18:33 - WARNING] - Audify.__main__ - ⚠️ Pinger: Unexpected status 502 (failures=1)
+[17-Aug-25 00:18:38 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002511251392
+➡️ Reason: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:18:38 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[17-Aug-25 00:18:38 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002511251392: ValueError
+[17-Aug-25 00:18:38 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[17-Aug-25 00:18:40 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[17-Aug-25 00:18:40 - INFO] - Audify.core.userbot - Starting Assistants...
+[17-Aug-25 00:18:40 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[17-Aug-25 00:18:40 - INFO] - AutoLeave - Sleeping for 4h 16m until 4:35 AM IST.
+[17-Aug-25 00:18:40 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002511251392: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:18:40 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[17-Aug-25 00:18:40 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[17-Aug-25 00:18:40 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[17-Aug-25 00:18:40 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[17-Aug-25 00:18:40 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[17-Aug-25 00:19:10 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[17-Aug-25 00:19:10 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[17-Aug-25 00:19:45 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[17-Aug-25 00:19:45 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download
+[17-Aug-25 00:21:13 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[17-Aug-25 00:21:13 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[17-Aug-25 00:21:14 - INFO] - Audify.core.dir - Directories Updated.
+[17-Aug-25 00:21:14 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[17-Aug-25 00:21:14 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[17-Aug-25 00:21:14 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[17-Aug-25 00:21:14 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[17-Aug-25 00:21:14 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[17-Aug-25 00:21:14 - INFO] - Audify.__main__ - 🚀 Starting pinger for: https://worker-production-1af23.up.railway.app
+[17-Aug-25 00:21:14 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[17-Aug-25 00:21:17 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[17-Aug-25 00:21:19 - WARNING] - Audify.__main__ - ⚠️ Pinger: Unexpected status 502 (failures=1)
+[17-Aug-25 00:25:19 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[17-Aug-25 00:25:19 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[17-Aug-25 00:25:19 - INFO] - Audify.core.dir - Directories Updated.
+[17-Aug-25 00:25:19 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[17-Aug-25 00:25:19 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[17-Aug-25 00:25:19 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[17-Aug-25 00:25:20 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[17-Aug-25 00:25:20 - INFO] - Audify.__main__ - 🌐 Web server started on port 8000
+[17-Aug-25 00:25:20 - INFO] - Audify.__main__ - 🚀 Starting pinger for: https://worker-production-1af23.up.railway.app
+[17-Aug-25 00:25:20 - INFO] - Audify.__main__ - 🔄 Pinger thread started
+[17-Aug-25 00:25:23 - INFO] - Audify.misc - ✅ Sudo Users Initialized Successfully.
+[17-Aug-25 00:25:25 - WARNING] - Audify.__main__ - ⚠️ Pinger: Unexpected status 502 (failures=1)
+[17-Aug-25 00:25:30 - ERROR] - Audify.core.bot - ❌ Unable to access the log group/channel.
+➡️ LOGGER_ID: -1002511251392
+➡️ Reason: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:25:30 - INFO] - Audify.core.bot - ℹ️ Bot will continue running without logging capability
+[17-Aug-25 00:25:30 - WARNING] - Audify.core.bot - ⚠️ Could not verify bot permissions in log group -1002511251392: ValueError
+[17-Aug-25 00:25:30 - INFO] - Audify.core.bot - ✅ Audify is now running as Music 🎵 Assistant 
+[17-Aug-25 00:25:32 - INFO] - Audify.plugins - ✅ All modules successfully loaded. Alphabot is ready to serve 🎶
+[17-Aug-25 00:25:32 - INFO] - Audify.core.userbot - Starting Assistants...
+[17-Aug-25 00:25:32 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[17-Aug-25 00:25:32 - INFO] - AutoLeave - Sleeping for 4h 9m until 4:35 AM IST.
+[17-Aug-25 00:25:32 - ERROR] - Audify.core.userbot - Assistant Account 1 failed to access the log group -1002511251392: ValueError - Peer id invalid: -1002511251392
+[17-Aug-25 00:25:32 - WARNING] - Audify.core.userbot - Bot will continue running without Assistant Account 1
+[17-Aug-25 00:25:32 - INFO] - Audify.core.userbot - Assistant Started as <a href=tg://user?id=8095280523>Cutie Pie</a>
+[17-Aug-25 00:25:32 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice client startup
+[17-Aug-25 00:25:32 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - skipping voice decorators
+[17-Aug-25 00:25:32 - INFO] - Audify - 🎧 Alphabot Music Bot started successfully with voice support.
+🛡️ Developed with passion by @devforgekush 💻
+[17-Aug-25 00:26:06 - WARNING] - Audify.platforms.Youtube - API_BASE_URL not set, falling back to yt-dlp
+[17-Aug-25 00:26:06 - INFO] - Audify.platforms.Youtube - Using yt-dlp fallback for download

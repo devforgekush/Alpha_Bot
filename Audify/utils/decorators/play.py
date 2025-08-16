@@ -115,6 +115,11 @@ def PlayWrapper(command):
 
         if not await is_active_chat(chat_id):
             userbot = await get_assistant(chat_id)
+            # If no assistant sessions are configured, get_assistant may return None.
+            if userbot is None:
+                return await message.reply_text(
+                    "⚠️ No assistant accounts are configured. Please set at least one STRING_SESSION in the config to enable assistant features."
+                )
             try:
                 try:
                     get = await app.get_chat_member(chat_id, userbot.id)
