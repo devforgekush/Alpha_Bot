@@ -1,5 +1,5 @@
 
-git+https://github.com/pytgcalls/pytgcalls.git
+git+https://github.com/pytgcalls/pytgcalls.git@v1.2.4
 aiofiles>=23.2.1
 aiohttp>=3.9.5
 apscheduler>=3.10.4
