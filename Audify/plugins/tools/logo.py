@@ -38,7 +38,7 @@ async def textpro_logo(theme_url: str, text: str) -> str:
 @app.on_message(filters.command("logo") & filters.text)
 async def logo_cmd(_, message: Message):
     if len(message.command) < 2:
-    return await message.reply("⚠️ Send text like: `/logo Alphabot`")
+        return await message.reply("⚠️ Send text like: `/logo Alphabot`")
 
     text = " ".join(message.command[1:])
     msg = await message.reply("🎨 Generating logo...")
