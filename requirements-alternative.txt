@@ -1,6 +1,5 @@
-# Minimal requirements for Railway deployment
-pytgcalls==2.0.0
-tgcalls==3.0.0.dev6
+# Alternative requirements with different pytgcalls version
+pytgcalls==1.2.4
 pyrogram==2.0.106
 tgcrypto==1.2.5
 python-dotenv==1.0.1

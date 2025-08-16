@@ -106,6 +106,11 @@ In your Railway project dashboard:
    - ✅ Fixed: Reduced build context size with improved .dockerignore
    - ✅ Fixed: Using only essential packages to avoid timeouts
 
+7. **tgcalls Version Not Found**
+   - ✅ Fixed: Updated to use `tgcalls==3.0.0.dev6` (available version)
+   - ✅ Fixed: Added fallback requirements with alternative versions
+   - ✅ Fixed: Dockerfile now tries alternative requirements if main fails
+
 ### Debugging Steps
 
 1. **Check Build Logs**
@@ -119,6 +124,9 @@ In your Railway project dashboard:
 
 4. **Check Environment Variables**
    - Ensure all required variables are set in Railway dashboard
+
+5. **Test Package Versions**
+   - Run: `python3 test_requirements.py` to check available versions
 
 ## 📊 Monitoring
 
@@ -155,12 +163,13 @@ If you encounter issues:
 - Using simplified requirements to avoid dependency conflicts
 - Fixed pytgcalls/tgcalls version conflicts
 - Optimized for Railway's build constraints and timeouts
+- Multiple requirements files for fallback options
 
 ## 🔧 Recent Fixes
 
 ### Dependency Conflict Resolution
 - **Issue**: `pytgcalls` and `tgcalls` version conflicts
-- **Solution**: Using fixed versions (`pytgcalls==2.0.0`, `tgcalls==2.0.0`)
+- **Solution**: Using fixed versions (`pytgcalls==2.0.0`, `tgcalls==3.0.0.dev6`)
 - **Result**: Eliminates pip dependency resolution errors
 
 ### Simplified Requirements
@@ -173,6 +182,12 @@ If you encounter issues:
 - **Solution**: Minimal Dockerfile with only essential system packages
 - **Result**: Faster, more reliable builds
 - **Additional**: Improved .dockerignore to reduce build context size
+
+### Version Availability Fix
+- **Issue**: `tgcalls==2.0.0` not available on PyPI
+- **Solution**: Using `tgcalls==3.0.0.dev6` (available version)
+- **Result**: Successful package installation
+- **Fallback**: Alternative requirements with different pytgcalls version
 
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version
