@@ -2,7 +2,12 @@
 # pytgcalls provides voice support. Installing from the upstream GitHub tag
 # is more reliable here because the PyPI release may depend on a tgcalls
 # version not present on PyPI. This will instruct pip to clone the repo tag.
-git+https://github.com/pytgcalls/pytgcalls.git@main
+# Git install for pytgcalls removed because build environments often block
+# git checkouts or the repo may not have the requested refs. pytgcalls is
+# optional for voice features; keep it out of the default requirements so the
+# container can build reliably. To enable voice support, either install
+# pytgcalls manually in the target environment or add a valid git+ URL / wheel.
+# git+https://github.com/pytgcalls/pytgcalls.git@main
 aiofiles==23.2.1
 aiohttp==3.9.5
 apscheduler==3.10.4
