@@ -40,7 +40,7 @@ def main():
         'git',
         'heroku3',
         'python-dotenv',
-        'youtubesearchpython',
+        'youtube_search_python',
         'bs4',
         'spotipy'
     ]

@@ -251,6 +251,13 @@ If you encounter issues:
 - **Additional**: Made SafoneAPI import optional to avoid git dependency issues
 - **Test**: Created test_dependencies.py for comprehensive dependency checking
 
+### Package Name Fix
+- **Issue**: `youtubesearchpython==1.6.6` not found (wrong package name)
+- **Solution**: Changed to `youtube-search-python==1.6.6` (correct package name)
+- **Result**: YouTube search functionality works correctly
+- **Additional**: Created flexible requirements file with version ranges
+- **Test**: Created test_package_availability.py to check package availability
+
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version
 - `Dockerfile.alpine` - Alpine Linux alternative

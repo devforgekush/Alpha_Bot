@@ -11,13 +11,15 @@ RUN apt-get update && \
 # Set working directory
 WORKDIR /app
 
-# Copy and install requirements (try basic if working fails)
+# Copy and install requirements (try working, then basic, then flexible)
 COPY requirements-working.txt .
 COPY requirements-basic.txt .
+COPY requirements-flexible.txt .
 
-# Try to install requirements, fallback to basic if needed
+# Try to install requirements with multiple fallbacks
 RUN pip3 install --no-cache-dir -r requirements-working.txt || \
-    pip3 install --no-cache-dir -r requirements-basic.txt
+    pip3 install --no-cache-dir -r requirements-basic.txt || \
+    pip3 install --no-cache-dir -r requirements-flexible.txt
 
 # Copy app
 COPY . .
