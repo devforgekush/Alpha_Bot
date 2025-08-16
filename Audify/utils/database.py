@@ -7,11 +7,38 @@ from typing import Tuple
 
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserAlreadyParticipant
-from pytgcalls import PyTgCalls
-from pytgcalls.exceptions import NoActiveGroupCall
-from pytgcalls.types import Update
-from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
-from pytgcalls.types.input_stream.quality import HighQualityAudio, HighQualityVideo
+
+# pytgcalls is optional: import if available, otherwise provide safe fallbacks
+try:
+    from pytgcalls import PyTgCalls
+    from pytgcalls.exceptions import NoActiveGroupCall
+    from pytgcalls.types import Update
+    from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
+    from pytgcalls.types.input_stream.quality import HighQualityAudio, HighQualityVideo
+    PYTGCALLS_AVAILABLE = True
+except Exception:
+    PYTGCALLS_AVAILABLE = False
+
+    class NoActiveGroupCall(Exception):
+        pass
+
+    class PyTgCalls:  # minimal stub
+        pass
+
+    class Update:  # minimal stub
+        pass
+
+    class AudioPiped:  # minimal stub
+        pass
+
+    class AudioVideoPiped:  # minimal stub
+        pass
+
+    class HighQualityAudio:  # minimal stub
+        pass
+
+    class HighQualityVideo:  # minimal stub
+        pass
 
 import config
 from ..logger import LOGGER
