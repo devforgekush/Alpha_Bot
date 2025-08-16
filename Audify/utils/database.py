@@ -8,7 +8,7 @@ from typing import Tuple
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserAlreadyParticipant
 
-# pytgcalls is optional: import if available, otherwise provide safe fallbacks
+# Try to import pytgcalls; if missing, disable voice features with safe stubs.
 try:
     from pytgcalls import PyTgCalls
     from pytgcalls.exceptions import NoActiveGroupCall
@@ -16,14 +16,15 @@ try:
     from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
     from pytgcalls.types.input_stream.quality import HighQualityAudio, HighQualityVideo
     PYTGCALLS_AVAILABLE = True
-except Exception:
+except ImportError:
     PYTGCALLS_AVAILABLE = False
 
     class NoActiveGroupCall(Exception):
         pass
 
-    class PyTgCalls:  # minimal stub
-        pass
+    class PyTgCalls:  # minimal stub used where PyTgCalls is referenced
+        def __init__(self, *args, **kwargs):
+            pass
 
     class Update:  # minimal stub
         pass
@@ -43,7 +44,8 @@ except Exception:
 import config
 from ..logger import LOGGER
 from ..mongo.logs import LOG_DB
-from ..utils.database import get_audio_bitrate, get_video_bitrate
+# NOTE: avoid importing this module from itself (would cause circular import)
+# from ..utils.database import get_audio_bitrate, get_video_bitrate
 from ..utils.decorators.play import check_audio, check_video
 from ..utils.formatters import check_duration, limit, seconds_to_min
 from ..utils.stream import check_audio_bitrate, check_video_bitrate
