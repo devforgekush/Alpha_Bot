@@ -41,11 +41,11 @@ RUN mkdir -p downloads
 # Set Python path explicitly
 ENV PYTHONPATH=/app
 
-# Make start script executable
-RUN chmod +x start_simple.py
+# Make start scripts executable
+RUN chmod +x start start_simple.py
 
 # Expose port
 EXPOSE 8000
 
-# Start the application
-CMD ["python3", "start_simple.py"]
+# Start the application using the simple start wrapper
+CMD ["bash", "start"]
