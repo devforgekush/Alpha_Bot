@@ -1,1 +1,2 @@
+export PYTHONPATH=/app
 python3 Audify/__main__.py
