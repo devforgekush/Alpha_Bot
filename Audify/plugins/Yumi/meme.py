@@ -28,6 +28,6 @@ async def meme_command(client, message):
         )
 
     except Exception as e:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"Error fetching meme: {e}")
-    await message.reply_text("⚠️ Sorry, I couldn't fetch a meme at the moment.")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"Error fetching meme: {e}")
+        await message.reply_text("⚠️ Sorry, I couldn't fetch a meme at the moment.")
