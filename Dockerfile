@@ -10,9 +10,13 @@ RUN apt-get update && \
 # Set working directory
 WORKDIR /app
 
-# Copy and install requirements
+# Copy and install requirements (try basic if working fails)
 COPY requirements-working.txt .
-RUN pip3 install --no-cache-dir -r requirements-working.txt
+COPY requirements-basic.txt .
+
+# Try to install requirements, fallback to basic if needed
+RUN pip3 install --no-cache-dir -r requirements-working.txt || \
+    pip3 install --no-cache-dir -r requirements-basic.txt
 
 # Copy app
 COPY . .

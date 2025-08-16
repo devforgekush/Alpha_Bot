@@ -116,6 +116,11 @@ In your Railway project dashboard:
    - ✅ Fixed: Removed problematic alternative requirements
    - ✅ Fixed: Simplified Dockerfile to avoid fallback issues
 
+9. **Dependency Resolution Conflicts**
+   - ✅ Fixed: Using compatible versions (`pytgcalls==2.1.0`, `tgcalls==2.0.0`)
+   - ✅ Fixed: Added basic requirements fallback without pytgcalls
+   - ✅ Fixed: Smart Dockerfile with fallback options
+
 ### Debugging Steps
 
 1. **Check Build Logs**
@@ -132,6 +137,9 @@ In your Railway project dashboard:
 
 5. **Test Package Versions**
    - Run: `python3 test_requirements.py` to check available versions
+
+6. **Test Basic Requirements**
+   - Run: `python3 test_basic.py` to test imports
 
 ## 📊 Monitoring
 
@@ -170,16 +178,18 @@ If you encounter issues:
 - Optimized for Railway's build constraints and timeouts
 - Multiple requirements files for fallback options
 - Using flexible version ranges to avoid specific version issues
+- Smart fallback system for dependency resolution
 
 ## 🔧 Recent Fixes
 
 ### Dependency Conflict Resolution
 - **Issue**: `pytgcalls` and `tgcalls` version conflicts
-- **Solution**: Using flexible version ranges (`pytgcalls>=2.0.0`)
+- **Solution**: Using compatible versions (`pytgcalls==2.1.0`, `tgcalls==2.0.0`)
 - **Result**: Eliminates pip dependency resolution errors
 
 ### Simplified Requirements
 - Created `requirements-working.txt` with minimal dependencies
+- Created `requirements-basic.txt` as fallback without pytgcalls
 - Reduces build time and potential conflicts
 - Ensures core functionality works reliably
 
@@ -191,9 +201,9 @@ If you encounter issues:
 
 ### Version Availability Fix
 - **Issue**: Specific pytgcalls versions not available on PyPI
-- **Solution**: Using flexible version ranges to let pip choose available versions
+- **Solution**: Using compatible version pairs and fallback options
 - **Result**: Successful package installation
-- **Simplified**: Removed problematic fallback logic
+- **Fallback**: Basic requirements without pytgcalls if needed
 
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version
