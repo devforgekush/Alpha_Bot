@@ -25,6 +25,7 @@ WORKDIR /app
 
 # Copy and install requirements
 COPY requirements.txt .
+COPY requirements-voice.txt .
 
 
 # Ensure compatible motor and pymongo versions are installed first
@@ -39,7 +40,7 @@ RUN pip3 install --no-cache-dir imageio-ffmpeg
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Install optional voice requirements when ENABLE_VOICE is true
-RUN if [ "$ENABLE_VOICE" = "true" ] ; then pip3 install --no-cache-dir -r requirements-voice.txt ; fi
+RUN if [ "$ENABLE_VOICE" = "true" ] && [ -f requirements-voice.txt ] ; then pip3 install --no-cache-dir -r requirements-voice.txt ; fi
 
 # Copy app
 COPY . .
