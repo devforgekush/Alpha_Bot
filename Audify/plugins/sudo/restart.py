@@ -5,8 +5,15 @@ import socket
 from datetime import datetime
 
 import urllib3
-from git import Repo
-from git.exc import GitCommandError, InvalidGitRepositoryError
+try:
+    from git import Repo
+    from git.exc import GitCommandError, InvalidGitRepositoryError
+    GITPYTHON_AVAILABLE = True
+except Exception:
+    Repo = None
+    GitCommandError = Exception
+    InvalidGitRepositoryError = Exception
+    GITPYTHON_AVAILABLE = False
 from pyrogram import filters
 
 import config

@@ -73,3 +73,6 @@ imageio-ffmpeg
 # Additional dependencies for Railway deployment
 motor==3.1.2
 pymongo==4.3.3
+
+# GitPython provides `git` module used by misc.py and update helpers
+GitPython==3.1.31

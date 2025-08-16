@@ -5,8 +5,15 @@ from os import execl, path
 from sys import argv
 
 import psutil
-from git import Repo
-from git.exc import GitCommandError, InvalidGitRepositoryError
+try:
+    from git import Repo
+    from git.exc import GitCommandError, InvalidGitRepositoryError
+    GITPYTHON_AVAILABLE = True
+except Exception:
+    Repo = None
+    GitCommandError = Exception
+    InvalidGitRepositoryError = Exception
+    GITPYTHON_AVAILABLE = False
 
 import socket
 import time
