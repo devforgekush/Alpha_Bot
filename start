@@ -28,6 +28,10 @@ python3 test_config.py
 echo "🔍 Testing git dependencies..."
 python3 test_git.py
 
+# Test all dependencies
+echo "🔍 Testing all dependencies..."
+python3 test_dependencies.py
+
 # Run health check first
 echo "🔍 Running health check..."
 python3 health_check.py

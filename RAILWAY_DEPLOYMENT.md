@@ -244,6 +244,13 @@ If you encounter issues:
 - **Additional**: Added git system dependency to Dockerfile
 - **Test**: Created test_git.py to verify gitpython and git command
 
+### Additional Dependencies Fix
+- **Issue**: ModuleNotFoundError for heroku3, youtubesearchpython, beautifulsoup4, spotipy
+- **Solution**: Added missing dependencies to all requirements files
+- **Result**: All platform integrations work correctly
+- **Additional**: Made SafoneAPI import optional to avoid git dependency issues
+- **Test**: Created test_dependencies.py for comprehensive dependency checking
+
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version
 - `Dockerfile.alpine` - Alpine Linux alternative

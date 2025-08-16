@@ -5,7 +5,18 @@ from Audify.core.userbot import Userbot
 from Audify.misc import dbb, heroku
 from Audify.mongo.logs import LOG_DB
 
-from SafoneAPI import SafoneAPI
+# Make SafoneAPI optional
+try:
+    from SafoneAPI import SafoneAPI
+    SAFONE_AVAILABLE = True
+except ImportError:
+    print("⚠️ SafoneAPI not available - some features may be limited")
+    SAFONE_AVAILABLE = False
+    # Create a dummy class
+    class SafoneAPI:
+        def __init__(self):
+            pass
+
 from .logger import LOGGER
 
 dirr()
