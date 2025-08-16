@@ -44,8 +44,6 @@ except ImportError:
 import config
 from ..logger import LOGGER
 from ..mongo.logs import LOG_DB
-# NOTE: avoid importing this module from itself (would cause circular import)
-# from ..utils.database import get_audio_bitrate, get_video_bitrate
 from ..utils.decorators.play import check_audio, check_video
 from ..utils.formatters import check_duration, limit, seconds_to_min
 from ..utils.stream import check_audio_bitrate, check_video_bitrate
