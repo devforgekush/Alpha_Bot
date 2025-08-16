@@ -6,6 +6,7 @@ RUN apt-get update && \
     ffmpeg \
     git \
     curl \
+    build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -13,10 +14,10 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Copy requirements first for better caching
-COPY requirements.txt .
+COPY requirements-simple.txt requirements.txt
 
-# Install Python dependencies
-RUN pip3 install --no-cache-dir --upgrade pip && \
+# Install Python dependencies with better error handling
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
     pip3 install --no-cache-dir -r requirements.txt
 
 # Copy application code

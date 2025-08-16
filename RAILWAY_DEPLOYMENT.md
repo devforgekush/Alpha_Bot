@@ -97,6 +97,10 @@ In your Railway project dashboard:
 4. **Health Check Failures**
    - ✅ Fixed: Added web server for Railway health checks
 
+5. **Dependency Conflicts (pytgcalls/tgcalls)**
+   - ✅ Fixed: Using simplified requirements with fixed versions
+   - ✅ Fixed: Using `requirements-simple.txt` with minimal dependencies
+
 ### Debugging Steps
 
 1. **Check Build Logs**
@@ -143,6 +147,20 @@ If you encounter issues:
 - Automatic pinging is enabled if `RAILWAY_URL` is set
 - All dependencies are now from PyPI to avoid git checkout issues
 - Python 3.11 is used for better compatibility
+- Using simplified requirements to avoid dependency conflicts
+- Fixed pytgcalls/tgcalls version conflicts
+
+## 🔧 Recent Fixes
+
+### Dependency Conflict Resolution
+- **Issue**: `pytgcalls` and `tgcalls` version conflicts
+- **Solution**: Using fixed versions (`pytgcalls==2.0.0`, `tgcalls==2.0.0`)
+- **Result**: Eliminates pip dependency resolution errors
+
+### Simplified Requirements
+- Created `requirements-simple.txt` with minimal dependencies
+- Reduces build time and potential conflicts
+- Ensures core functionality works reliably
 
 ---
 
