@@ -1,0 +1,29 @@
+name: Publish Voice Build (debug)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Build tag for logs (not pushed)'
+        required: false
+        default: 'debug'
+
+jobs:
+  build-debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build image (debug, no push)
+        run: |
+          docker build --progress=plain -t alpha-bot-voice:debug . --build-arg ENABLE_VOICE=true
+      - name: Save image metadata
+        run: |
+          echo "Image built: alpha-bot-voice:debug"
+          docker images | head -n 20
+
+# This workflow builds the voice-enabled image but does not push it to a registry.
+# Use it to debug build errors in Actions logs before publishing.

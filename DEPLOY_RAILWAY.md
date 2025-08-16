@@ -47,3 +47,29 @@ A GitHub Actions workflow can be used to validate that the Dockerfile builds wit
 7. Security
 - Never commit secret tokens. Use Railway's environment variables manager to store secrets.
 
+8. Publishing a voice-enabled image (GHCR) and using it on Railway
+
+If you need voice features in production, the recommended approach is to publish a prebuilt voice-enabled image to a container registry and point Railway to that image instead of building on Railway.
+
+Steps to publish to GitHub Container Registry (GHCR):
+
+- Create a Personal Access Token (PAT) with the `write:packages` scope.
+- Add the token to your repository secrets as `CR_PAT` (Repository -> Settings -> Secrets -> Actions).
+- Go to the Actions tab, open "Publish Voice-enabled Image" and run it (choose a tag, e.g. `latest`). The workflow will build the image with `--build-arg ENABLE_VOICE=true` and push to `ghcr.io/<owner>/alpha-bot-voice:<tag>`.
+
+Notes:
+- If the build fails, inspect the Action logs to see missing system packages or pip build errors. You can iterate on `Dockerfile` pinning or add required apt packages.
+- Use the debug workflow `Publish Voice Build (debug)` (no push) to test the build without publishing (Actions -> select the workflow and run).
+
+Using the published image on Railway:
+
+1. In Railway, choose the option to deploy from a Container Registry image.
+2. Use the image URI `ghcr.io/<your-github-username>/alpha-bot-voice:<tag>`.
+3. Add environment variables from `sample.env` in the Railway UI (do not commit secrets).
+4. Start the service. The image includes voice dependencies and native libs; ensure you have assistant `STRING_SESSION` env set for auto-joining calls.
+
+Helpful tips:
+- Consider using `workflow_dispatch` to build the voice image on-demand after any changes that affect voice.
+- If you prefer Docker Hub, adapt the GHCR workflow to log in/push to Docker Hub using `DOCKER_USERNAME`/`DOCKER_PASSWORD` secrets.
+
+
