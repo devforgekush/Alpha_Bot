@@ -22,7 +22,8 @@ httpx==0.25.2
 instaloader==4.9
 img2pdf==0.4.4
 lexica-api==1.5.1
-motor==3.3.2
+motor==3.1.2
+pymongo==3.12.3
 numpy==1.26.4
 openai==1.0.0
 opencv-python==4.9.0.80
