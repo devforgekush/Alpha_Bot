@@ -16,7 +16,13 @@ COPY requirements-working.txt .
 COPY requirements-basic.txt .
 COPY requirements-flexible.txt .
 
-# Try to install requirements with multiple fallbacks
+
+# Ensure compatible motor and pymongo versions are installed first
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
+RUN pip3 uninstall -y motor pymongo || true
+RUN pip3 install --no-cache-dir motor==3.1.2 pymongo==3.12.3
+
+# Then install requirements with multiple fallbacks
 RUN pip3 install --no-cache-dir -r requirements-working.txt || \
     pip3 install --no-cache-dir -r requirements-basic.txt || \
     pip3 install --no-cache-dir -r requirements-flexible.txt
