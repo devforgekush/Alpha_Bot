@@ -6,6 +6,24 @@ export PYTHONPATH=/app
 # Create downloads directory if it doesn't exist
 mkdir -p downloads
 
+# Check if config.py exists
+echo "🔍 Checking for config.py..."
+if [ -f "/app/config.py" ]; then
+    echo "✅ config.py found in /app/"
+elif [ -f "config.py" ]; then
+    echo "✅ config.py found in current directory"
+else
+    echo "❌ config.py not found!"
+    echo "📁 Current directory contents:"
+    ls -la
+    echo "📁 /app/ directory contents:"
+    ls -la /app/ || echo "Cannot access /app/"
+fi
+
+# Test config import
+echo "🔍 Testing config import..."
+python3 test_config.py
+
 # Run health check first
 echo "🔍 Running health check..."
 python3 health_check.py

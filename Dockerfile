@@ -21,11 +21,22 @@ RUN pip3 install --no-cache-dir -r requirements-working.txt || \
 # Copy app
 COPY . .
 
+# Ensure config.py is in the right place and accessible
+RUN ls -la /app/ && \
+    echo "Checking if config.py exists:" && \
+    ls -la /app/config.py || echo "config.py not found in /app/"
+
 # Create downloads directory
 RUN mkdir -p downloads
+
+# Set Python path explicitly
+ENV PYTHONPATH=/app
+
+# Make start script executable
+RUN chmod +x start_simple.py
 
 # Expose port
 EXPOSE 8000
 
 # Start the application
-CMD ["bash", "start"]
+CMD ["python3", "start_simple.py"]

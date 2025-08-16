@@ -126,6 +126,12 @@ In your Railway project dashboard:
     - ✅ Fixed: Bot can now run without pytgcalls (voice features disabled)
     - ✅ Fixed: Added proper error handling for missing voice dependencies
 
+11. **ModuleNotFoundError: No module named 'config'**
+    - ✅ Fixed: Created multiple config import locations
+    - ✅ Fixed: Added fallback config in Audify package
+    - ✅ Fixed: Updated start command with better error handling
+    - ✅ Fixed: Created simple start script with debugging
+
 ### Debugging Steps
 
 1. **Check Build Logs**
@@ -145,6 +151,12 @@ In your Railway project dashboard:
 
 6. **Test Basic Requirements**
    - Run: `python3 test_basic.py` to test imports
+
+7. **Test Config Import**
+   - Run: `python3 test_config.py` to test config import
+
+8. **Test Start Process**
+   - Run: `python3 test_start.py` to test complete start process
 
 ## 📊 Monitoring
 
@@ -185,6 +197,8 @@ If you encounter issues:
 - Using flexible version ranges to avoid specific version issues
 - Smart fallback system for dependency resolution
 - **pytgcalls is now optional** - bot works without voice features if pytgcalls fails
+- **Multiple config locations** - config can be imported from root or Audify package
+- **Simple start script** - better error handling and debugging
 
 ## 🔧 Recent Fixes
 
@@ -217,10 +231,21 @@ If you encounter issues:
 - **Result**: Bot can run without voice features
 - **Benefit**: More reliable deployment with degraded functionality
 
+### Config Import Fix
+- **Issue**: ModuleNotFoundError when config not available
+- **Solution**: Multiple config locations and fallback imports
+- **Result**: Config can be imported from root or Audify package
+- **Benefit**: More reliable config loading
+
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version
 - `Dockerfile.alpine` - Alpine Linux alternative
 - Use these if the main Dockerfile still has issues
+
+### Alternative Start Commands
+- `Procfile` - Uses simple start script with debugging
+- `Procfile.alternative` - Uses direct Python command
+- Use these if the main start command has issues
 
 ---
 

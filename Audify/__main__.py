@@ -14,7 +14,18 @@ except ImportError:
     NoActiveGroupCall = Exception  # Fallback exception
     PYTGCALLS_AVAILABLE = False
 
-import config
+# Try to import config from different locations
+try:
+    import config
+    print("✅ Imported config from root directory")
+except ImportError:
+    try:
+        from Audify import config
+        print("✅ Imported config from Audify package")
+    except ImportError:
+        print("❌ Failed to import config from both locations")
+        raise
+
 from Audify import LOGGER, app, userbot
 from Audify.core.call import Audify
 from Audify.misc import sudo

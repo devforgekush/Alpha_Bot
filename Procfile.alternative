@@ -1,0 +1,1 @@
+worker: python3 Audify/__main__.py
