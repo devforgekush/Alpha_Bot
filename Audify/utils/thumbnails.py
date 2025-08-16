@@ -246,8 +246,3 @@ async def get_thumb(videoid: str):
     background_path = f"cache/{videoid}_v4.png"
     background.save(background_path)
     return background_path
-
-    except Exception as e:
-        logging.error(f"Error generating thumbnail for video {videoid}: {e}")
-        traceback.print_exc()
-        return None
