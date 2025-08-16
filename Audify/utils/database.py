@@ -44,9 +44,7 @@ except ImportError:
 import config
 from ..logger import LOGGER
 from ..mongo.logs import LOG_DB
-from ..utils.decorators.play import check_audio, check_video
 from ..utils.formatters import check_duration, limit, seconds_to_min
-from ..utils.stream import check_audio_bitrate, check_video_bitrate
 
 import random
 from typing import Dict, List, Union
