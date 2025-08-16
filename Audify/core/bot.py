@@ -1,6 +1,9 @@
-import uvloop
-
-uvloop.install()
+try:
+    import uvloop
+    uvloop.install()
+except Exception:
+    # uvloop is optional; fall back to default asyncio event loop if unavailable
+    pass
 
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
