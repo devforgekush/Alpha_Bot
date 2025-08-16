@@ -84,6 +84,10 @@ STRING5 = getenv("STRING_SESSION5")
 STRING6 = getenv("STRING_SESSION6")
 STRING7 = getenv("STRING_SESSION7")
 
+# Whether assistant accounts should auto-join support channels/groups on startup
+# Set to 'True' to enable joining, 'False' to disable. Default: False
+AUTO_JOIN_SUPPORT = getenv("AUTO_JOIN_SUPPORT", "False").lower() in ("1", "true", "yes")
+
 # Pyrogram Filter for Banned Users (empty list for now)
 BANNED_USERS = filters.user([])
 
