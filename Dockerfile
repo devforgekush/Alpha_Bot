@@ -1,16 +1,32 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs19
+FROM python:3.11-slim
 
-# 🛠 Fix Debian Buster repo archive issue
-RUN sed -i 's|http://deb.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list && \
-    sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ffmpeg \
+    git \
+    curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY . /app/
-COPY config.py /app/config.py
-WORKDIR /app/
-RUN pip3 install --no-cache-dir -U -r requirements.txt
+# Set working directory
+WORKDIR /app
 
-CMD bash start
+# Copy requirements first for better caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create downloads directory
+RUN mkdir -p downloads
+
+# Expose port (if needed)
+EXPOSE 8000
+
+# Start the application
+CMD ["bash", "start"]

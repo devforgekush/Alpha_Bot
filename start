@@ -1,2 +1,15 @@
+#!/bin/bash
+
+# Set Python path
 export PYTHONPATH=/app
+
+# Create downloads directory if it doesn't exist
+mkdir -p downloads
+
+# Run health check first
+echo "🔍 Running health check..."
+python3 health_check.py
+
+# Start the main application
+echo "🚀 Starting Audify Music Bot..."
 python3 Audify/__main__.py

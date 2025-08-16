@@ -15,6 +15,14 @@ from Audify.plugins import ALL_MODULES
 from Audify.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
 
+# Import web server
+try:
+    from web_server import start_web_server
+    WEB_SERVER_AVAILABLE = True
+except ImportError:
+    WEB_SERVER_AVAILABLE = False
+    LOGGER(__name__).warning("⚠️ Web server module not available")
+
 
 def start_pinger():
     def ping_loop():
@@ -49,6 +57,16 @@ async def init():
     ):
         LOGGER(__name__).error("🚫 String Session Missing! Please configure at least one Pyrogram session string.")
         LOGGER(__name__).warning("⚠️ Bot will continue running but may have limited functionality")
+    
+    # Start web server for Railway health checks
+    if WEB_SERVER_AVAILABLE:
+        try:
+            port = int(getattr(config, "PORT", 8000))
+            start_web_server(port)
+            LOGGER(__name__).info(f"🌐 Web server started on port {port}")
+        except Exception as e:
+            LOGGER(__name__).warning(f"⚠️ Failed to start web server: {e}")
+    
     start_pinger()
     await sudo()
     try:

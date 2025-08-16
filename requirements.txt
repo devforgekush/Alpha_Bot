@@ -1,11 +1,10 @@
-
-git+https://github.com/pytgcalls/pytgcalls.git@v1.2.4
+# Core dependencies
+pytgcalls>=1.2.4
 aiofiles>=23.2.1
 aiohttp>=3.9.5
 apscheduler>=3.10.4
 asyncio>=3.4.3
 beautifulsoup4>=4.12.0
-    
 daxxhub>=1.0.0
 deepai==1.0.1
 dnspython>=2.4.2
@@ -13,7 +12,6 @@ emojis>=0.7.0
 Faker>=25.2.0
 ffmpeg-python>=0.2.0
 future==0.18.3
-git+https://github.com/AsmSafone/SafoneAPI.git
 gitpython>=3.1.43
 gpytranslate>=1.2.2
 gtts>=2.4.0
@@ -57,3 +55,7 @@ wget>=3.2
 youtube-search>=2.1.2
 youtube-search-python>=1.6.6
 yt-dlp>=2025.6.25
+
+# Custom repositories (commented out to avoid git checkout issues)
+# git+https://github.com/pytgcalls/pytgcalls.git@v1.2.4
+# git+https://github.com/AsmSafone/SafoneAPI.git
