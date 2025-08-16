@@ -1,0 +1,52 @@
+name: Publish Voice-enabled Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag (e.g. latest or v1.0.0)'
+        required: true
+        default: 'latest'
+  push:
+    tags:
+      - 'voice-*'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.CR_PAT }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/alpha-bot-voice:${{ github.event.inputs.tag || github.ref_name }}
+          build-args: |
+            ENABLE_VOICE=true
+          platforms: linux/amd64
+
+      - name: Output image
+        run: echo "Published ghcr.io/${{ github.repository_owner }}/alpha-bot-voice:${{ github.event.inputs.tag || github.ref_name }}"
+
+# Notes:
+# - Create a Personal Access Token with `write:packages` scope and add it to the repo secrets as `CR_PAT`.
+# - After publishing, configure Railway to use the published image `ghcr.io/<org>/alpha-bot-voice:tag`.

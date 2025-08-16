@@ -11,13 +11,20 @@ RUN apt-get update && \
         ca-certificates \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# If voice support is requested, install additional build tools needed by
-# native extensions used by voice packages (this keeps default images small).
+# If voice support is requested, install additional build tools and native
+# libraries required by voice packages (keep disabled by default to keep the
+# default image small and avoid build failures on limited builders).
 RUN if [ "$ENABLE_VOICE" = "true" ] ; then \
         apt-get update && apt-get install -y --no-install-recommends \
             build-essential \
             libffi-dev \
             libsndfile1 \
+            libopus-dev \
+            libavcodec-dev \
+            libavformat-dev \
+            libavutil-dev \
+            libpulse-dev \
+            libasound2-dev \
             pkg-config \
             ffmpeg \
         && apt-get clean && rm -rf /var/lib/apt/lists/* ; fi
