@@ -79,3 +79,39 @@
 [16-Aug-25 22:32:51 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
 [16-Aug-25 22:32:51 - INFO] - AutoLeave - AutoLeave task started and running in background.
 [16-Aug-25 22:32:51 - INFO] - AutoLeave - Sleeping for 6h 2m until 4:35 AM IST.
+[16-Aug-25 22:39:10 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 22:39:10 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 22:39:10 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 22:39:10 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 22:39:10 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 22:39:10 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 22:39:10 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 22:39:10 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 22:39:10 - INFO] - AutoLeave - Sleeping for 5h 55m until 4:35 AM IST.
+[16-Aug-25 22:54:01 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 22:54:01 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 22:54:01 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 22:54:01 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 22:54:01 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 22:54:01 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 22:54:01 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 22:54:01 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 22:54:02 - INFO] - AutoLeave - Sleeping for 5h 40m until 4:35 AM IST.
+[16-Aug-25 23:04:11 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:04:11 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:04:11 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:04:11 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:04:11 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:04:11 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:04:11 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:04:12 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:04:12 - INFO] - AutoLeave - Sleeping for 5h 30m until 4:35 AM IST.
+[16-Aug-25 23:08:53 - INFO] - Audify.core.mongo - Connecting to your Mongo Database...
+[16-Aug-25 23:08:53 - INFO] - Audify.core.mongo - Connected to your Mongo Database.
+[16-Aug-25 23:08:53 - INFO] - Audify.core.dir - Directories Updated.
+[16-Aug-25 23:08:53 - INFO] - Audify.core.git - Git Client Found [VPS DEPLOYER]
+[16-Aug-25 23:08:53 - INFO] - Audify.misc - 📦 MongoDB Database Loaded Successfully.
+[16-Aug-25 23:08:53 - INFO] - Audify.core.bot - 🚀 Initializing Audify Bot...
+[16-Aug-25 23:08:53 - WARNING] - Audify.core.call - ⚠️ pytgcalls not available - voice features disabled
+[16-Aug-25 23:08:53 - INFO] - AutoLeave - AutoLeave task started and running in background.
+[16-Aug-25 23:08:53 - INFO] - AutoLeave - Sleeping for 5h 26m until 4:35 AM IST.

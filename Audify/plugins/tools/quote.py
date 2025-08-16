@@ -5,28 +5,34 @@ from Audify import app
 from httpx import AsyncClient, Timeout
 import re, random
 
-# Create HTTP client but avoid http2 if h2 not installed
-try:
-    fetch = AsyncClient(
-        http2=True,
-        verify=False,
-        headers={
-            "Accept-Language": "id-ID",
-            "User-Agent": "Mozilla/5.0",
-        },
-        timeout=Timeout(20),
-    )
-except Exception:
-    # fallback without http2
-    fetch = AsyncClient(
-        http2=False,
-        verify=False,
-        headers={
-            "Accept-Language": "id-ID",
-            "User-Agent": "Mozilla/5.0",
-        },
-        timeout=Timeout(20),
-    )
+# Lazy HTTP client factory to avoid import-time httpx/http2 failures
+_http_client = None
+
+def get_http_client():
+    global _http_client
+    if _http_client is None:
+        try:
+            _http_client = AsyncClient(
+                http2=True,
+                verify=False,
+                headers={
+                    "Accept-Language": "id-ID",
+                    "User-Agent": "Mozilla/5.0",
+                },
+                timeout=Timeout(20),
+            )
+        except Exception:
+            # fallback without http2
+            _http_client = AsyncClient(
+                http2=False,
+                verify=False,
+                headers={
+                    "Accept-Language": "id-ID",
+                    "User-Agent": "Mozilla/5.0",
+                },
+                timeout=Timeout(20),
+            )
+    return _http_client
 
 class QuotlyException(Exception):
     pass

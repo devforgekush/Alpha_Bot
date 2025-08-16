@@ -49,18 +49,54 @@ def start_pinger():
             LOGGER(__name__).info("ℹ️ RAILWAY_URL not set, pinger disabled")
             return
         LOGGER(__name__).info(f"🚀 Starting pinger for: {url}")
+        # Configurable values (can be set in config.py)
+        interval = getattr(config, "PING_INTERVAL", 720)  # seconds between pings
+        timeout = getattr(config, "PING_TIMEOUT", 10)
+        retries = getattr(config, "PING_RETRIES", 3)
+        retry_backoff = getattr(config, "PING_RETRY_BACKOFF", 2)  # seconds
+
+        session = requests.Session()
+        consecutive_failures = 0
+
         while True:
             try:
-                response = requests.get(url, timeout=10)
-                if response.status_code == 200:
-                    LOGGER(__name__).debug("✅ Pinger: App is alive")
-                else:
-                    LOGGER(__name__).warning(f"⚠️ Pinger: Unexpected status {response.status_code}")
-            except requests.exceptions.RequestException as e:
-                LOGGER(__name__).warning(f"⚠️ Pinger failed: {type(e).__name__}")
+                last_status = None
+                # Try a few times for transient server errors (502/503/504)
+                for attempt in range(1, retries + 1):
+                    try:
+                        response = session.get(url, timeout=timeout)
+                        last_status = response.status_code
+                        if response.status_code == 200:
+                            consecutive_failures = 0
+                            LOGGER(__name__).debug("✅ Pinger: App is alive")
+                            break
+                        # treat some 5xx responses as transient and retry
+                        if response.status_code in (502, 503, 504) and attempt < retries:
+                            LOGGER(__name__).debug(f"🔁 Pinger: transient {response.status_code}, retry {attempt}/{retries}")
+                            time.sleep(retry_backoff)
+                            continue
+                        # non-OK, non-transient or exhausted retries
+                        consecutive_failures += 1
+                        # Only log a warning every few failures to avoid noise
+                        if consecutive_failures == 1 or consecutive_failures % 3 == 0:
+                            LOGGER(__name__).warning(f"⚠️ Pinger: Unexpected status {response.status_code} (failures={consecutive_failures})")
+                        break
+                    except requests.exceptions.RequestException as e:
+                        last_status = type(e).__name__
+                        # on request exceptions, retry unless out of attempts
+                        if attempt < retries:
+                            LOGGER(__name__).debug(f"🔁 Pinger: request exception {type(e).__name__}, retry {attempt}/{retries}")
+                            time.sleep(retry_backoff)
+                            continue
+                        consecutive_failures += 1
+                        LOGGER(__name__).warning(f"⚠️ Pinger failed: {type(e).__name__} (failures={consecutive_failures})")
+                        break
             except Exception as e:
-                LOGGER(__name__).error(f"❌ Pinger error: {type(e).__name__}")
-            time.sleep(720)  # 12 minutes
+                # Unexpected error in the ping loop itself
+                consecutive_failures += 1
+                LOGGER(__name__).error(f"❌ Pinger error: {type(e).__name__} (failures={consecutive_failures})")
+            # Sleep before next cycle
+            time.sleep(interval)
     t = threading.Thread(target=ping_loop, daemon=True)
     t.start()
     LOGGER(__name__).info("🔄 Pinger thread started")
@@ -97,12 +133,16 @@ async def init():
     except:
         pass
     await app.start()
+    import traceback
     for all_module in ALL_MODULES:
         try:
             importlib.import_module("Audify.plugins" + all_module)
             LOGGER("Audify.plugins").debug(f"✅ Loaded module: {all_module}")
         except Exception as e:
-            LOGGER("Audify.plugins").error(f"❌ Failed to load module {all_module}: {type(e).__name__}")
+            tb = traceback.format_exc()
+            LOGGER("Audify.plugins").error(
+                f"❌ Failed to load module {all_module}: {type(e).__name__} - {e}\nTraceback:\n{tb}"
+            )
     LOGGER("Audify.plugins").info("✅ All modules successfully loaded. Alphabot is ready to serve 🎶")
     await userbot.start()
     

@@ -31,22 +31,31 @@ class Alphabot(Client):
         self.username = self.me.username
         self.mention = self.me.mention
 
+        # Validate LOGGER_ID before attempting to send startup logs
         try:
-            await self.send_message(
-                chat_id=config.LOGGER_ID,
-                text=f"<u><b>✅ {self.mention} Bot Started Successfully.</b><u>\n\n🆔 <b>Bot ID:</b> <code>{self.id}</code>\n👤 <b>Name:</b> {self.name}\n🔗 <b>Username:</b> @{self.username}",
-            )
-            LOGGER(__name__).info(f"✅ Startup log sent successfully to {config.LOGGER_ID}")
-        except (errors.ChannelInvalid, errors.PeerIdInvalid):
-            LOGGER(__name__).error(
-                f"❌ Failed to send startup log.\n➡️ LOGGER_ID: {config.LOGGER_ID}\n➡️ Ensure the bot is added to the specified log group or channel."
-            )
-            LOGGER(__name__).info("ℹ️ Bot will continue running without logging capability")
-        except Exception as ex:
-            LOGGER(__name__).error(
-                f"❌ Unable to access the log group/channel.\n➡️ LOGGER_ID: {config.LOGGER_ID}\n➡️ Reason: {type(ex).__name__} - {str(ex)}"
-            )
-            LOGGER(__name__).info("ℹ️ Bot will continue running without logging capability")
+            lid = int(getattr(config, 'LOGGER_ID', 0))
+        except Exception:
+            lid = None
+
+        if lid and lid != 0:
+            try:
+                await self.send_message(
+                    chat_id=lid,
+                    text=f"<u><b>✅ {self.mention} Bot Started Successfully.</b><u>\n\n🆔 <b>Bot ID:</b> <code>{self.id}</code>\n👤 <b>Name:</b> {self.name}\n🔗 <b>Username:</b> @{self.username}",
+                )
+                LOGGER(__name__).info(f"✅ Startup log sent successfully to {lid}")
+            except (errors.ChannelInvalid, errors.PeerIdInvalid) as e:
+                LOGGER(__name__).error(
+                    f"❌ Failed to send startup log.\n➡️ LOGGER_ID: {lid}\n➡️ Ensure the bot is added to the specified log group or channel.\n➡️ Error: {type(e).__name__}"
+                )
+                LOGGER(__name__).info("ℹ️ Bot will continue running without logging capability")
+            except Exception as ex:
+                LOGGER(__name__).error(
+                    f"❌ Unable to access the log group/channel.\n➡️ LOGGER_ID: {lid}\n➡️ Reason: {type(ex).__name__} - {str(ex)}"
+                )
+                LOGGER(__name__).info("ℹ️ Bot will continue running without logging capability")
+        else:
+            LOGGER(__name__).info("ℹ️ LOGGER_ID not configured or invalid; startup logs disabled")
 
         # Check bot permissions in log group
         try:
