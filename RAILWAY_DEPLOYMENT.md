@@ -111,6 +111,11 @@ In your Railway project dashboard:
    - ✅ Fixed: Added fallback requirements with alternative versions
    - ✅ Fixed: Dockerfile now tries alternative requirements if main fails
 
+8. **pytgcalls Version Not Found**
+   - ✅ Fixed: Using `pytgcalls>=2.0.0` to let pip choose available version
+   - ✅ Fixed: Removed problematic alternative requirements
+   - ✅ Fixed: Simplified Dockerfile to avoid fallback issues
+
 ### Debugging Steps
 
 1. **Check Build Logs**
@@ -164,16 +169,17 @@ If you encounter issues:
 - Fixed pytgcalls/tgcalls version conflicts
 - Optimized for Railway's build constraints and timeouts
 - Multiple requirements files for fallback options
+- Using flexible version ranges to avoid specific version issues
 
 ## 🔧 Recent Fixes
 
 ### Dependency Conflict Resolution
 - **Issue**: `pytgcalls` and `tgcalls` version conflicts
-- **Solution**: Using fixed versions (`pytgcalls==2.0.0`, `tgcalls==3.0.0.dev6`)
+- **Solution**: Using flexible version ranges (`pytgcalls>=2.0.0`)
 - **Result**: Eliminates pip dependency resolution errors
 
 ### Simplified Requirements
-- Created `requirements-simple.txt` with minimal dependencies
+- Created `requirements-working.txt` with minimal dependencies
 - Reduces build time and potential conflicts
 - Ensures core functionality works reliably
 
@@ -184,10 +190,10 @@ If you encounter issues:
 - **Additional**: Improved .dockerignore to reduce build context size
 
 ### Version Availability Fix
-- **Issue**: `tgcalls==2.0.0` not available on PyPI
-- **Solution**: Using `tgcalls==3.0.0.dev6` (available version)
+- **Issue**: Specific pytgcalls versions not available on PyPI
+- **Solution**: Using flexible version ranges to let pip choose available versions
 - **Result**: Successful package installation
-- **Fallback**: Alternative requirements with different pytgcalls version
+- **Simplified**: Removed problematic fallback logic
 
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version
