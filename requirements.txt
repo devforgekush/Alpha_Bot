@@ -78,4 +78,11 @@ pymongo==4.3.3
 GitPython==3.1.31
 
 # ntgcalls provides TelegramServerError and server-side call helpers used by the voice stack
-ntgcalls
+ntgcalls==0.5.4
+
+# Voice stack (optional): pytgcalls and tgcalls provide group call and streaming
+# functionality. Keep these pinned to known-compatible versions. If you prefer
+# to keep voice features optional, remove or comment these lines and the code
+# will run with voice disabled.
+pytgcalls==2.1.0
+tgcalls==2.0.0
