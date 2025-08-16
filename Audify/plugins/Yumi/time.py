@@ -51,6 +51,6 @@ async def get_city_time(client: Client, message: Message):
         )
 
     except Exception as e:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"Error fetching time: {e}")
-    await message.reply_text("⚠️ Something went wrong. Please try again later.", quote=True)
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"Error fetching time: {e}")
+        await message.reply_text("⚠️ Something went wrong. Please try again later.", quote=True)
