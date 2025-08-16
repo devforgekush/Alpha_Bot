@@ -50,9 +50,9 @@ async def send_action_image(client, message: Message, action_type: str, category
         else:
             await message.reply_text("❌ Error occurred while fetching image.")
     except Exception as e:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"[Waifu.pics] Error: {e}")
-    await message.reply_text("❌ Failed to get image from API.")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"[Waifu.pics] Error: {e}")
+        await message.reply_text("❌ Failed to get image from API.")
 
 
 # ✅ Register SFW handlers
