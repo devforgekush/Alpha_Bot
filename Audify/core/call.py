@@ -6,17 +6,72 @@ from typing import Union
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
 from ntgcalls import TelegramServerError
-from pytgcalls import PyTgCalls
-from pytgcalls.exceptions import (
-    NoActiveGroupCall,
-)
-from pytgcalls.types import (
-    MediaStream,
-    AudioQuality,
-    VideoQuality,
-    Update,
-)
-
+# Try to import pytgcalls, make it optional
+try:
+    from pytgcalls import PyTgCalls
+    from pytgcalls.exceptions import (
+        AlreadyJoinedError,
+        NoActiveGroupCall,
+        NotInGroupCallError,
+    )
+    from pytgcalls.types import (
+        MediaStream,
+        AudioQuality,
+        VideoQuality,
+        Update,
+        AudioPiped,
+        AudioVideoPiped,
+        JoinedGroupCallParticipant,
+        LeftGroupCallParticipant,
+        VideoPiped,
+    )
+    PYTGCALLS_AVAILABLE = True
+except ImportError:
+    # Create dummy classes if pytgcalls is not available
+    class PyTgCalls:
+        def __init__(self, *args, **kwargs):
+            pass
+        async def start(self):
+            pass
+        async def stop(self):
+            pass
+        async def join_group_call(self, *args, **kwargs):
+            pass
+        async def leave_group_call(self, *args, **kwargs):
+            pass
+        async def stream_call(self, *args, **kwargs):
+            pass
+        async def decorators(self):
+            pass
+    
+    class NoActiveGroupCall(Exception):
+        pass
+    
+    class AlreadyJoinedError(Exception):
+        pass
+    
+    class NotInGroupCallError(Exception):
+        pass
+    
+    class Update:
+        pass
+    
+    class AudioPiped:
+        pass
+    
+    class VideoPiped:
+        pass
+    
+    class AudioVideoPiped:
+        pass
+    
+    class JoinedGroupCallParticipant:
+        pass
+    
+    class LeftGroupCallParticipant:
+        pass
+    
+    PYTGCALLS_AVAILABLE = False
 
 import config
 from Audify import LOGGER, YouTube, app
@@ -53,6 +108,10 @@ async def _clear_(chat_id):
 
 class Call(PyTgCalls):
     def __init__(self):
+        if not PYTGCALLS_AVAILABLE:
+            LOGGER(__name__).warning("⚠️ pytgcalls not available - voice features disabled")
+            return
+            
         self.userbot1 = Client(
             name="AudifyAss1",
             api_id=config.API_ID,
@@ -588,6 +647,10 @@ class Call(PyTgCalls):
         return str(round(sum(pings) / len(pings), 3))
 
     async def start(self):
+        if not PYTGCALLS_AVAILABLE:
+            LOGGER(__name__).warning("⚠️ pytgcalls not available - skipping voice client startup")
+            return
+            
         LOGGER(__name__).info("Starting PyTgCalls Client...\n")
         if config.STRING1:
             await self.one.start()
@@ -600,7 +663,28 @@ class Call(PyTgCalls):
         if config.STRING5:
             await self.five.start()
 
+    async def stop(self):
+        if not PYTGCALLS_AVAILABLE:
+            LOGGER(__name__).warning("⚠️ pytgcalls not available - skipping voice client stop")
+            return
+            
+        LOGGER(__name__).info("Stopping PyTgCalls Client...\n")
+        if config.STRING1:
+            await self.one.stop()
+        if config.STRING2:
+            await self.two.stop()
+        if config.STRING3:
+            await self.three.stop()
+        if config.STRING4:
+            await self.four.stop()
+        if config.STRING5:
+            await self.five.stop()
+
     async def decorators(self):
+        if not PYTGCALLS_AVAILABLE:
+            LOGGER(__name__).warning("⚠️ pytgcalls not available - skipping voice decorators")
+            return
+            
         @self.one.on_kicked()
         @self.two.on_kicked()
         @self.three.on_kicked()

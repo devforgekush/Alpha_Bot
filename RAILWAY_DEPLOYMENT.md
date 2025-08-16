@@ -121,6 +121,11 @@ In your Railway project dashboard:
    - ✅ Fixed: Added basic requirements fallback without pytgcalls
    - ✅ Fixed: Smart Dockerfile with fallback options
 
+10. **ModuleNotFoundError: No module named 'pytgcalls'**
+    - ✅ Fixed: Made pytgcalls imports optional with graceful fallback
+    - ✅ Fixed: Bot can now run without pytgcalls (voice features disabled)
+    - ✅ Fixed: Added proper error handling for missing voice dependencies
+
 ### Debugging Steps
 
 1. **Check Build Logs**
@@ -179,6 +184,7 @@ If you encounter issues:
 - Multiple requirements files for fallback options
 - Using flexible version ranges to avoid specific version issues
 - Smart fallback system for dependency resolution
+- **pytgcalls is now optional** - bot works without voice features if pytgcalls fails
 
 ## 🔧 Recent Fixes
 
@@ -204,6 +210,12 @@ If you encounter issues:
 - **Solution**: Using compatible version pairs and fallback options
 - **Result**: Successful package installation
 - **Fallback**: Basic requirements without pytgcalls if needed
+
+### Optional pytgcalls Support
+- **Issue**: ModuleNotFoundError when pytgcalls not available
+- **Solution**: Made pytgcalls imports optional with graceful fallback
+- **Result**: Bot can run without voice features
+- **Benefit**: More reliable deployment with degraded functionality
 
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version

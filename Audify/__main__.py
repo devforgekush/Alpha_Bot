@@ -5,7 +5,14 @@ import time
 import requests
 
 from pyrogram import idle
-from pytgcalls.exceptions import NoActiveGroupCall
+
+# Try to import pytgcalls, make it optional
+try:
+    from pytgcalls.exceptions import NoActiveGroupCall
+    PYTGCALLS_AVAILABLE = True
+except ImportError:
+    NoActiveGroupCall = Exception  # Fallback exception
+    PYTGCALLS_AVAILABLE = False
 
 import config
 from Audify import LOGGER, app, userbot
@@ -87,23 +94,34 @@ async def init():
             LOGGER("Audify.plugins").error(f"❌ Failed to load module {all_module}: {type(e).__name__}")
     LOGGER("Audify.plugins").info("✅ All modules successfully loaded. Alphabot is ready to serve 🎶")
     await userbot.start()
-    await Audify.start()
-    try:
-        await Audify.stream_call("https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4")
-    except NoActiveGroupCall:
-        LOGGER("Audify").warning(
-            "📢 Please start a voice chat in your log group or linked channel!\n\n⚠️ Alphabot cannot stream without an active group call."
+    
+    # Initialize Audify only if pytgcalls is available
+    if PYTGCALLS_AVAILABLE:
+        await Audify.start()
+        try:
+            await Audify.stream_call("https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4")
+        except NoActiveGroupCall:
+            LOGGER("Audify").warning(
+                "📢 Please start a voice chat in your log group or linked channel!\n\n⚠️ Alphabot cannot stream without an active group call."
+            )
+            LOGGER("Audify").info("ℹ️ Bot will continue running without streaming capability")
+        except:
+            pass
+        await Audify.decorators()
+        LOGGER("Audify").info(
+            "🎧 Alphabot Music Bot started successfully with voice support.\n🛡️ Developed with passion by @devforgekush 💻"
         )
-        LOGGER("Audify").info("ℹ️ Bot will continue running without streaming capability")
-    except:
-        pass
-    await Audify.decorators()
-    LOGGER("Audify").info(
-        "🎧 Alphabot Music Bot started successfully.\n🛡️ Developed with passion by @devforgekush 💻"
-    )
+    else:
+        LOGGER("Audify").warning("⚠️ pytgcalls not available - voice features disabled")
+        LOGGER("Audify").info(
+            "🎧 Alphabot Music Bot started successfully (voice features disabled).\n🛡️ Developed with passion by @devforgekush 💻"
+        )
+    
     await idle()
     await app.stop()
     await userbot.stop()
+    if PYTGCALLS_AVAILABLE:
+        await Audify.stop()
     LOGGER("Audify").info("🛑 Alphabot Music Bot has stopped. See you soon! 👋")
 
 
