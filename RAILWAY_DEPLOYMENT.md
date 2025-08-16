@@ -101,6 +101,11 @@ In your Railway project dashboard:
    - ✅ Fixed: Using simplified requirements with fixed versions
    - ✅ Fixed: Using `requirements-simple.txt` with minimal dependencies
 
+6. **Build Timeout (apt-get install fails)**
+   - ✅ Fixed: Optimized Dockerfile with minimal system dependencies
+   - ✅ Fixed: Reduced build context size with improved .dockerignore
+   - ✅ Fixed: Using only essential packages to avoid timeouts
+
 ### Debugging Steps
 
 1. **Check Build Logs**
@@ -149,6 +154,7 @@ If you encounter issues:
 - Python 3.11 is used for better compatibility
 - Using simplified requirements to avoid dependency conflicts
 - Fixed pytgcalls/tgcalls version conflicts
+- Optimized for Railway's build constraints and timeouts
 
 ## 🔧 Recent Fixes
 
@@ -161,6 +167,17 @@ If you encounter issues:
 - Created `requirements-simple.txt` with minimal dependencies
 - Reduces build time and potential conflicts
 - Ensures core functionality works reliably
+
+### Build Optimization
+- **Issue**: Railway build timeouts during apt-get install
+- **Solution**: Minimal Dockerfile with only essential system packages
+- **Result**: Faster, more reliable builds
+- **Additional**: Improved .dockerignore to reduce build context size
+
+### Alternative Dockerfiles
+- `Dockerfile.minimal` - Ultra-minimal version
+- `Dockerfile.alpine` - Alpine Linux alternative
+- Use these if the main Dockerfile still has issues
 
 ---
 

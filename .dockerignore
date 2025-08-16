@@ -1,6 +1,7 @@
 # Git
 .git
 .gitignore
+.github
 
 # Python
 __pycache__
@@ -58,6 +59,7 @@ temp/
 README.md
 LICENSE
 *.md
+RAILWAY_DEPLOYMENT.md
 
 # Development files
 .env
@@ -67,7 +69,24 @@ LICENSE
 .env.production
 
 # Docker
-Dockerfile
+Dockerfile*
 .dockerignore
 docker-compose.yml
 docker-compose.*.yml
+
+# Large files and directories
+downloads/
+cache/
+raw_files/
+*.session
+*.session-journal
+
+# Test files
+tests/
+test_*
+*_test.py
+
+# Backup files
+*.bak
+*.backup
+*.old
