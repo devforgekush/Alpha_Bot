@@ -1,8 +1,12 @@
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from telethon.sync import TelegramClient as TeleClient
-from telethon.sessions import StringSession as TeleString
+try:
+    from telethon.sync import TelegramClient as TeleClient
+    from telethon.sessions import StringSession as TeleString
+except Exception:
+    TeleClient = None
+    TeleString = None
 from Audify import app
 
 API_ID = 29557063  # Replace with your default API ID

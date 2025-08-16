@@ -4,7 +4,6 @@ from pyrogram.types import (
     InlineKeyboardMarkup, InlineKeyboardButton,
     CallbackQuery, ChatPermissions, Message
 )
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from config import MONGO_DB_URI
 from Audify import app
 
@@ -125,7 +124,12 @@ async def close_nightmode():
             LOGGER(__name__).error(f"[!] Failed to unlock group {cid}: {e}")
 
 # ─── Scheduler ───
-scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(start_nightmode, trigger="cron", hour=0, minute=0)   # 12:00 AM
-scheduler.add_job(close_nightmode, trigger="cron", hour=6, minute=0)   # 6:00 AM
-scheduler.start()
+try:
+    from apscheduler.schedulers.asyncio import AsyncIOScheduler
+    scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
+    scheduler.add_job(start_nightmode, trigger="cron", hour=0, minute=0)
+    scheduler.add_job(close_nightmode, trigger="cron", hour=6, minute=0)
+    scheduler.start()
+except Exception:
+    # apscheduler not available; nightmode cron jobs will be disabled until dependency is installed
+    pass

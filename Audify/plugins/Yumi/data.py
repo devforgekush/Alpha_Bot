@@ -1,15 +1,19 @@
 from pyrogram import Client, filters
-from faker import Faker
 from Audify import app
 from pyrogram.types import Message
 
-# Create a Faker instance
-fake = Faker()
+# faker is optional — guard import and disable command if unavailable
+try:
+    from faker import Faker
+    fake = Faker()
+except Exception:
+    fake = None
 
-# Generate person info command handler
+
 @app.on_message(filters.command("data"))
 async def generate_info(client: Client, message: Message):
-    # Generate fake data
+    if not fake:
+        return await message.reply_text("⚠️ Feature unavailable: missing dependency 'faker'.")
     name = fake.name()
     address = fake.address()
     country = fake.country()
@@ -19,7 +23,6 @@ async def generate_info(client: Client, message: Message):
     state = fake.state()
     zipcode = fake.zipcode()
 
-    # Create a message with the fake data
     info_message = (
         f"📇 **Full Name:** `{name}`\n"
         f"🏠 **Address:** `{address}`\n"
@@ -31,5 +34,4 @@ async def generate_info(client: Client, message: Message):
         f"🔢 **Zip Code:** `{zipcode}`"
     )
 
-    # Send the fake data to the user
     await message.reply_text(info_message)

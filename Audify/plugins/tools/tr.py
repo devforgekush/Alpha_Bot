@@ -1,13 +1,18 @@
 from pyrogram import filters
 from pyrogram.types import Message
 from Audify import app
-from gpytranslate import Translator
+try:
+    from gpytranslate import Translator
+except Exception:
+    Translator = None
 
-trans = Translator()
+trans = Translator() if Translator else None
 
 
 @app.on_message(filters.command("tr"))
 async def translate(_, message: Message) -> None:
+    if not trans:
+        return await message.reply_text("⚠️ Feature unavailable: missing dependency 'gpytranslate'.")
     reply_msg = message.reply_to_message
 
     if not reply_msg:

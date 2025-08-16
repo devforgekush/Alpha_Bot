@@ -2,15 +2,21 @@ from traceback import format_exc
 from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from search_engine_parser.core.engines.google import Search as GoogleSearch
-from search_engine_parser.core.engines.stackoverflow import Search as StackSearch
-from search_engine_parser.core.exceptions import NoResultsFound, NoResultsOrTrafficError
+try:
+    from search_engine_parser.core.engines.google import Search as GoogleSearch
+    from search_engine_parser.core.engines.stackoverflow import Search as StackSearch
+    from search_engine_parser.core.exceptions import NoResultsFound, NoResultsOrTrafficError
+except Exception:
+    GoogleSearch = None
+    StackSearch = None
+    NoResultsFound = Exception
+    NoResultsOrTrafficError = Exception
 
 from Audify import app
 
-# Initialize search engines
-gsearch = GoogleSearch()
-stsearch = StackSearch()
+# Initialize search engines if available
+gsearch = GoogleSearch() if GoogleSearch else None
+stsearch = StackSearch() if StackSearch else None
 
 
 def build_keyboard(results):
@@ -28,6 +34,8 @@ def build_keyboard(results):
 
 @app.on_message(filters.command("google"))
 async def search_google(app, msg: Message):
+    if not gsearch:
+        return await msg.reply_text("⚠️ Feature unavailable: missing dependency 'search_engine_parser'.")
     query = msg.text.split(None, 1)
     if len(query) == 1:
         return await msg.reply_text("🔍 Please provide something to search.")
@@ -56,6 +64,8 @@ async def search_google(app, msg: Message):
 
 @app.on_message(filters.command("stack"))
 async def search_stackoverflow(app, msg: Message):
+    if not stsearch:
+        return await msg.reply_text("⚠️ Feature unavailable: missing dependency 'search_engine_parser'.")
     query = msg.text.split(None, 1)
     if len(query) == 1:
         return await msg.reply_text("📘 Please provide a query to search StackOverflow.")

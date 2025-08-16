@@ -1,7 +1,6 @@
 import asyncio
-from telegram import CallbackQuery
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 
 from Audify import YouTube, app
 from Audify.core.call import Audify
@@ -413,4 +412,6 @@ async def markup_timer():
                 continue
 
 
-asyncio.create_task(markup_timer())
+from Audify.utils.async_helpers import start_background_task
+
+start_background_task(markup_timer())

@@ -5,16 +5,28 @@ from Audify import app
 from httpx import AsyncClient, Timeout
 import re, random
 
-# ──────────────── Quote API HTTP Client ────────────────
-fetch = AsyncClient(
-    http2=True,
-    verify=False,
-    headers={
-        "Accept-Language": "id-ID",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edge/107.0.1418.42",
-    },
-    timeout=Timeout(20),
-)
+# Create HTTP client but avoid http2 if h2 not installed
+try:
+    fetch = AsyncClient(
+        http2=True,
+        verify=False,
+        headers={
+            "Accept-Language": "id-ID",
+            "User-Agent": "Mozilla/5.0",
+        },
+        timeout=Timeout(20),
+    )
+except Exception:
+    # fallback without http2
+    fetch = AsyncClient(
+        http2=False,
+        verify=False,
+        headers={
+            "Accept-Language": "id-ID",
+            "User-Agent": "Mozilla/5.0",
+        },
+        timeout=Timeout(20),
+    )
 
 class QuotlyException(Exception):
     pass

@@ -1,6 +1,11 @@
 from pyrogram import Client, filters  
-import whois  
 from Audify import app  
+
+# whois optional
+try:
+    import whois
+except Exception:
+    whois = None
 
 
 def get_domain_hosting_info(domain_name):  

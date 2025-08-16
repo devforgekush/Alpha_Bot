@@ -1,4 +1,7 @@
-from pykeyboard import InlineKeyboard
+try:
+    from pykeyboard import InlineKeyboard
+except Exception:
+    InlineKeyboard = None
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, Message
 

@@ -1,10 +1,15 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
-import qrcode
 from Audify import app
 from PIL import Image
 import io
+import io
 
+# qrcode optional
+try:
+    import qrcode
+except ImportError:
+    qrcode = None
 
 # Generate a QR code from input text
 def generate_qr_code(text):
@@ -30,6 +35,8 @@ def generate_qr_code(text):
 async def qr_handler(client: Client, message: Message):
     command_text = message.command
     if len(command_text) > 1:
+        if not qrcode:
+            return await message.reply_text("⚠️ Feature unavailable: missing dependency 'qrcode'.")
         input_text = " ".join(command_text[1:])
         qr_image = generate_qr_code(input_text)
         await message.reply_photo(qr_image, caption="🧾 Here's your QR Code.")

@@ -2,7 +2,10 @@ from io import BytesIO
 from os import path, remove
 from time import time
 
-import img2pdf
+try:
+    import img2pdf
+except Exception:
+    img2pdf = None
 from PIL import Image
 from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
@@ -38,6 +41,8 @@ async def convert(main_message: Message, reply_messages, status_message: Message
         img = Image.open(img_path).convert("RGB")
         img.save(img_path, "JPEG", quality=100)
 
+    if not img2pdf:
+        return await message.reply_text("⚠️ Feature unavailable: missing dependency 'img2pdf'.")
     pdf = BytesIO(img2pdf.convert(documents))
     pdf.name = "Audify.pdf"
 

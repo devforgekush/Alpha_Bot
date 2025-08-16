@@ -1,18 +1,27 @@
 import os
 import re
 import aiofiles
-from aiohttp import ClientSession
 from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 from Audify import app
 
 # ─── Session and Post ─── #
-aiohttpsession = ClientSession()
+from aiohttp import ClientSession
+
+# Lazy aiohttp session to avoid requiring an event loop at import time
+_aiohttp_session = None
+
+def get_aiohttp_session():
+    global _aiohttp_session
+    if _aiohttp_session is None:
+        _aiohttp_session = ClientSession()
+    return _aiohttp_session
 
 
 async def post(url: str, *args, **kwargs):
-    async with aiohttpsession.post(url, *args, **kwargs) as resp:
+    session = get_aiohttp_session()
+    async with session.post(url, *args, **kwargs) as resp:
         text = await resp.text()
         try:
             return await resp.json()

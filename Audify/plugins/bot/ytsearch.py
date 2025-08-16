@@ -1,7 +1,10 @@
 import logging
 from pyrogram import filters
 from pyrogram.types import Message
-from youtube_search import YoutubeSearch
+try:
+    from youtube_search import YoutubeSearch
+except Exception:
+    YoutubeSearch = None
 
 from Audify import app
 from config import BOT_USERNAME
@@ -15,6 +18,8 @@ async def ytsearch(_, message: Message):
 
         query = message.text.split(None, 1)[1]
         m = await message.reply_text("🔍 Searching on YouTube...")
+        if not YoutubeSearch:
+            return await m.edit("⚠️ Feature unavailable: missing dependency 'youtube_search'.")
         results = YoutubeSearch(query, max_results=5).to_dict()
 
         text = "🎬 **Top 5 YouTube Results:**\n\n"

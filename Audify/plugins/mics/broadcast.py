@@ -1,6 +1,7 @@
 import time
 import logging
 import asyncio
+from Audify.utils.async_helpers import start_background_task
 
 from pyrogram import filters
 from pyrogram.enums import ChatMembersFilter
@@ -196,4 +197,4 @@ async def auto_clean():
         except Exception as e:
             logger.warning(f"AutoClean error: {e}")
 
-asyncio.create_task(auto_clean())
+start_background_task(auto_clean())

@@ -2,11 +2,16 @@ from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton as ikb, InlineKeyboardMarkup as ikm, Message
 from pyrogram.enums import ChatAction
 from requests import get
-import pyshorteners
 
 from Audify import app
 
-shortener = pyshorteners.Shortener()
+# pyshorteners optional
+try:
+    import pyshorteners
+    shortener = pyshorteners.Shortener()
+except Exception:
+    pyshorteners = None
+    shortener = None
 
 @app.on_message(filters.command("short"))
 async def short_urls(client, message: Message):

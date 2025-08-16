@@ -2,6 +2,8 @@ FROM python:3.11-slim
 
 # Install only essential system dependencies (avoid ffmpeg here to prevent OOM in limited builders)
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUTF8=1
+ENV PYTHONUNBUFFERED=1
 ARG ENABLE_VOICE=false
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

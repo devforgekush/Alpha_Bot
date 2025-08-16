@@ -1,4 +1,5 @@
 import asyncio
+from Audify.utils.async_helpers import start_background_task
 
 from Audify.misc import db
 from Audify.utils.database import get_active_chats, is_music_playing
@@ -21,4 +22,4 @@ async def timer():
             db[chat_id][0]["played"] += 1
 
 
-asyncio.create_task(timer())
+start_background_task(timer())

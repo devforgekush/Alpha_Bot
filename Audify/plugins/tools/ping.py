@@ -4,8 +4,8 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from Audify import app
-from Audify.core.call import Alphabot
-from Audify.utils import bot_sys_stats
+from Audify.core.call import Audify as CallClient
+from Audify.utils.sys import bot_sys_stats
 from Audify.utils.decorators.language import language
 from Audify.utils.inline import supp_markup
 from config import BANNED_USERS, PING_IMG_URL
@@ -19,7 +19,10 @@ async def ping_com(client, message: Message, _):
         photo=PING_IMG_URL,
         caption=_["ping_1"].format(app.mention),
     )
-    pytgping = await Audify.ping()
+    try:
+        pytgping = await CallClient.ping()
+    except Exception:
+        pytgping = "N/A"
     UP, CPU, RAM, DISK = await bot_sys_stats()
     resp = (datetime.now() - start).microseconds / 1000
     await response.edit_text(

@@ -1,4 +1,5 @@
 import asyncio
+from Audify.utils.async_helpers import start_background_task
 import logging
 from datetime import datetime, timedelta
 import pytz
@@ -76,4 +77,4 @@ async def auto_leave():
         logger.info("Cleanup complete. Sleeping again until next 4:35 AM.")
 
 # Start the background auto leave task
-asyncio.create_task(auto_leave())
+start_background_task(auto_leave())
