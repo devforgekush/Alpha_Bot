@@ -2,11 +2,23 @@ FROM python:3.11-slim
 
 # Install only essential system dependencies (avoid ffmpeg here to prevent OOM in limited builders)
 ENV DEBIAN_FRONTEND=noninteractive
+ARG ENABLE_VOICE=false
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         git \
         ca-certificates \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# If voice support is requested, install additional build tools needed by
+# native extensions used by voice packages (this keeps default images small).
+RUN if [ "$ENABLE_VOICE" = "true" ] ; then \
+        apt-get update && apt-get install -y --no-install-recommends \
+            build-essential \
+            libffi-dev \
+            libsndfile1 \
+            pkg-config \
+            ffmpeg \
+        && apt-get clean && rm -rf /var/lib/apt/lists/* ; fi
 
 # Set working directory
 WORKDIR /app
@@ -25,6 +37,9 @@ RUN pip3 install --no-cache-dir imageio-ffmpeg
 
 # Install Python requirements
 RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Install optional voice requirements when ENABLE_VOICE is true
+RUN if [ "$ENABLE_VOICE" = "true" ] ; then pip3 install --no-cache-dir -r requirements-voice.txt ; fi
 
 # Copy app
 COPY . .
