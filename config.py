@@ -128,3 +128,13 @@ if SUPPORT_CHAT and not re.match(r"(?:http|https)://", SUPPORT_CHAT):
 
 if SOURCE_CODE and not re.match(r"(?:http|https)://", SOURCE_CODE):
     raise SystemExit("[ERROR] - SOURCE_CODE must start with http:// or https://")
+
+# Pinger defaults (tunable)
+# Seconds between pings (default 12 minutes)
+PING_INTERVAL = int(getenv("PING_INTERVAL", "720"))
+# Timeout for each ping request
+PING_TIMEOUT = int(getenv("PING_TIMEOUT", "10"))
+# Number of retry attempts for transient errors (502/503/504)
+PING_RETRIES = int(getenv("PING_RETRIES", "3"))
+# Seconds to wait between retry attempts
+PING_RETRY_BACKOFF = int(getenv("PING_RETRY_BACKOFF", "2"))
