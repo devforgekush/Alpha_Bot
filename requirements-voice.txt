@@ -1,5 +1,5 @@
 # Optional voice stack for group calls
 # These packages require build tools and native dependencies in some cases.
-ntgcalls==0.5.4
+ntgcalls==2.0.5
 pytgcalls==2.1.0
 tgcalls==2.0.0
