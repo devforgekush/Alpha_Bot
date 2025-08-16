@@ -42,8 +42,8 @@ async def user_has_permission(chat_title : str, chat_id: int, user_id: int, perm
                 have_permission = False
 
     except Exception as e:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"Error: {e}")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"Error: {e}")
         have_permission = False
 
     if not have_permission:

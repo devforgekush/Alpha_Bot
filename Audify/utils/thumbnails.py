@@ -118,7 +118,7 @@ async def get_thumb(videoid: str):
         for result in (await results.next())["result"]:
             title = result.get("title")
             if title:
-                title = re.sub("\W+", " ", title).title()
+                title = re.sub(r"\W+", " ", title).title()
             else:
                 title = "Unsupported Title"
             duration = result.get("duration")

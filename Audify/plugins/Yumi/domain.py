@@ -10,7 +10,7 @@ def get_domain_hosting_info(domain_name):
     except whois.parser.PywhoisError as e:  
     from Audify.logger import LOGGER
     LOGGER(__name__).error(f"Error: {e}")  
-        return None  
+    return None  
 
 
 @app.on_message(filters.command("domain"))  

@@ -27,10 +27,10 @@ def download(url: str, my_hook) -> str:
         x.add_progress_hook(my_hook)
         dloader = x.download([url])
     except Exception as y_e:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"Download error: {y_e}")
-    return
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"Download error: {y_e}")
+        return None
     else:
-        dloader
+        pass
     xyz = path.join("downloads", f"{info['id']}.{info['ext']}")
     return xyz

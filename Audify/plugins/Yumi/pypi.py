@@ -11,7 +11,7 @@ def get_pypi_info(package_name):
     except Exception as e:
     from Audify.logger import LOGGER
     LOGGER(__name__).error(f"Error fetching PyPI information: {e}")
-        return None
+    return None
 
 @app.on_message(filters.command("pypi", prefixes="/"))
 async def pypi_info_command(client, message):
