@@ -6,8 +6,15 @@ import sys
 
 from typing import Tuple
 
-from git import Repo
-from git.exc import GitCommandError, InvalidGitRepositoryError
+try:
+    from git import Repo
+    from git.exc import GitCommandError, InvalidGitRepositoryError
+    GITPYTHON_AVAILABLE = True
+except Exception:
+    Repo = None
+    GitCommandError = Exception
+    InvalidGitRepositoryError = Exception
+    GITPYTHON_AVAILABLE = False
 
 import config
 
@@ -41,6 +48,9 @@ def git():
         UPSTREAM_REPO = f"https://{GIT_USERNAME}:{config.GIT_TOKEN}@{TEMP_REPO}"
     else:
         UPSTREAM_REPO = config.UPSTREAM_REPO
+    if not GITPYTHON_AVAILABLE:
+        LOGGER(__name__).warning("GitPython not installed — skipping git deployment helpers.")
+        return
     try:
         repo = Repo()
         LOGGER(__name__).info(f"Git Client Found [VPS DEPLOYER]")
