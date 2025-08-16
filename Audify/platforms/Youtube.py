@@ -513,7 +513,9 @@ class YouTubeAPI:
         def audio_dl():
             try:
                 sexid = extract_video_id(link)
-                path = api_dl(sexid)
+                # api_dl is async; run it synchronously here because this function
+                # executes inside a thread via run_in_executor
+                path = asyncio.run(api_dl(sexid))
                 if path:
                     return path
                 else:
