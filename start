@@ -24,10 +24,14 @@ fi
 echo "🔍 Testing config import..."
 python3 test_config.py
 
+# Test git dependencies
+echo "🔍 Testing git dependencies..."
+python3 test_git.py
+
 # Run health check first
 echo "🔍 Running health check..."
 python3 health_check.py
 
 # Start the main application
 echo "🚀 Starting Audify Music Bot..."
-python3 Audify/__main__.py
+python3 start_simple.py

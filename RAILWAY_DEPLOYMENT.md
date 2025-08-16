@@ -237,6 +237,13 @@ If you encounter issues:
 - **Result**: Config can be imported from root or Audify package
 - **Benefit**: More reliable config loading
 
+### Git Dependency Fix
+- **Issue**: ModuleNotFoundError when git module not available
+- **Solution**: Added gitpython==3.1.42 to all requirements files
+- **Result**: Git operations work correctly
+- **Additional**: Added git system dependency to Dockerfile
+- **Test**: Created test_git.py to verify gitpython and git command
+
 ### Alternative Dockerfiles
 - `Dockerfile.minimal` - Ultra-minimal version
 - `Dockerfile.alpine` - Alpine Linux alternative

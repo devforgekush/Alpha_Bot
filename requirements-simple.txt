@@ -14,3 +14,4 @@ Pillow==9.5.0
 yt-dlp==2025.6.25
 gtts==2.4.0
 pydub==0.25.1
+gitpython==3.1.42

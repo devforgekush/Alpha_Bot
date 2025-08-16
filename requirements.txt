@@ -60,3 +60,6 @@ yt-dlp==2025.6.25
 # Custom repositories (commented out to avoid git checkout issues)
 # git+https://github.com/pytgcalls/pytgcalls.git@v1.2.4
 # git+https://github.com/AsmSafone/SafoneAPI.git
+
+# Additional dependencies for Railway deployment
+gitpython==3.1.43
