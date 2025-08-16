@@ -27,9 +27,9 @@ for filename in os.listdir(r"./strings/langs/"):
         for item in languages["en"]:
             if item not in languages[language_name]:
                 languages[language_name][item] = languages["en"][item]
-    try:
-        languages_present[language_name] = languages[language_name]["name"]
-    except:
-        from Audify.logger import LOGGER
-        LOGGER(__name__).error("There is some issue with the language file inside bot.")
-        exit()
+        try:
+            languages_present[language_name] = languages[language_name]["name"]
+        except Exception as e:
+            from Audify.logger import LOGGER
+            LOGGER(__name__).error(f"There is some issue with the language file {filename}: {type(e).__name__}")
+            LOGGER(__name__).warning(f"Skipping language file {filename}")

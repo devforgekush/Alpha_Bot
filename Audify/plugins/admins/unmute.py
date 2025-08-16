@@ -1,11 +1,3 @@
-# ---------------------------------------------------------
-# Audify Bot - All rights reserved
-# ---------------------------------------------------------
-# This code is part of the Audify Bot project.
-# Unauthorized copying, distribution, or use is prohibited.
-# © Graybots™. All rights reserved.
-# ---------------------------------------------------------
-
 from Audify import app
 from pyrogram import filters, enums
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton

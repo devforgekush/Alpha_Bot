@@ -1,11 +1,3 @@
-# ---------------------------------------------------------
-# Audify Bot - All rights reserved
-# ---------------------------------------------------------
-# This code is part of the Audify Bot project.
-# Unauthorized copying, distribution, or use is prohibited.
-# © Graybots™. All rights reserved.
-# ---------------------------------------------------------
-
 from typing import Optional, Tuple
 from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 from config import MONGO_DB_URI

@@ -1,11 +1,3 @@
-# ---------------------------------------------------------
-# Audify Bot - All rights reserved
-# ---------------------------------------------------------
-# This code is part of the Audify Bot project.
-# Unauthorized copying, distribution, or use is prohibited.
-# © Graybots™. All rights reserved.
-# ---------------------------------------------------------
-
 import asyncio
 from datetime import datetime, timedelta
 from collections import defaultdict

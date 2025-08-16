@@ -3,6 +3,7 @@ from os.path import realpath
 
 import aiohttp
 from aiohttp import client_exceptions
+from youtubesearchpython.__future__ import VideosSearch
 
 
 class UnableToFetchCarbon(Exception):

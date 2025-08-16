@@ -1,11 +1,3 @@
-# ---------------------------------------------------------
-# Alphabot - All rights reserved
-# ---------------------------------------------------------
-# This code is part of the Alphabot project.
-# Unauthorized copying, distribution, or use is prohibited.
-# Developed by @devforgekush. All rights reserved.
-# ---------------------------------------------------------
-
 import re
 from os import getenv
 from dotenv import load_dotenv
@@ -52,6 +44,13 @@ SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", "")
 # Heroku (if used)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
+
+# Railway Configuration
+RAILWAY_URL = getenv("RAILWAY_URL", None)
+
+# API Configuration for YouTube downloads
+API_KEY = getenv("API_KEY", None)
+API_BASE_URL = getenv("API_BASE_URL", None)
 
 # GitHub Upstream
 UPSTREAM_REPO = getenv(

@@ -1,3 +1,11 @@
+# ---------------------------------------------------------
+# Alphabot - All rights reserved
+# ---------------------------------------------------------
+# This code is part of the Alphabot project.
+# Unauthorized copying, distribution, or use is prohibited.
+# Developed by @devforgekush. All rights reserved.
+# ---------------------------------------------------------
+
 import asyncio
 import os
 import re
@@ -18,7 +26,7 @@ import logging
 import requests
 import time
 
-from config import API_KEY, API_BASE_URL
+from config import API_BASE_URL
 
 MIN_FILE_SIZE = 51200
 
@@ -36,54 +44,186 @@ def extract_video_id(link: str) -> str:
             return match.group(1)
 
     raise ValueError("Invalid YouTube link provided.")
-    
 
-
-def api_dl(video_id: str) -> str | None:
-    api_url = f"{API_BASE_URL}/download/song/{video_id}?key={API_KEY}"
-    file_path = os.path.join("downloads", f"{video_id}.mp3")
-
-    # ✅ Check if already downloaded
-    if os.path.exists(file_path):
+async def api_dl(link: str) -> str | None:
+    """Download using our self-hosted YouTube API"""
+    if not API_BASE_URL:
         from Audify.logger import LOGGER
-        LOGGER(__name__).info(f"Song {file_path} already exists. Skipping download ✅")
-        return file_path
-
+        LOGGER(__name__).warning("API_BASE_URL not set, falling back to yt-dlp")
+        return await fallback_dl(link)
+    
     try:
-        response = requests.get(api_url, stream=True, timeout=10)
+        # Extract video ID
+        video_id = extract_video_id(link)
+        file_path = os.path.join("downloads", f"{video_id}.mp3")
 
-        if response.status_code == 200:
-            os.makedirs("downloads", exist_ok=True)
-            with open(file_path, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        f.write(chunk)
-
-            # ✅ Check file size
-            file_size = os.path.getsize(file_path)
-            if file_size < MIN_FILE_SIZE:
-                from Audify.logger import LOGGER
-                LOGGER(__name__).warning(f"Downloaded file is too small ({file_size} bytes). Removing.")
-                os.remove(file_path)
-                return None
-
+        # Check if already downloaded
+        if os.path.exists(file_path):
             from Audify.logger import LOGGER
-            LOGGER(__name__).info(f"Song Downloaded Successfully ✅ {file_path} ({file_size} bytes)")
+            LOGGER(__name__).info(f"Song {file_path} already exists. Skipping download ✅")
             return file_path
 
-        else:
-            from Audify.logger import LOGGER
-            LOGGER(__name__).error(f"Failed to download {video_id}. Status: {response.status_code}")
-            return None
+        # Start download via API
+        download_response = requests.post(f"{API_BASE_URL}/download", json={
+            "url": link,
+            "format": "bestaudio",
+            "quality": "192"
+        }, timeout=10)
 
-    except requests.RequestException as e:
+        if download_response.status_code != 200:
+            from Audify.logger import LOGGER
+            LOGGER(__name__).error(f"Failed to start download. Status: {download_response.status_code}")
+            return await fallback_dl(link)
+
+        task_id = download_response.json().get("task_id")
+        if not task_id:
+            from Audify.logger import LOGGER
+            LOGGER(__name__).error("No task ID received from API")
+            return await fallback_dl(link)
+
+        # Wait for download to complete
+        max_wait = 300  # 5 minutes max
+        wait_time = 0
+        while wait_time < max_wait:
+            status_response = requests.get(f"{API_BASE_URL}/status/{task_id}", timeout=10)
+            if status_response.status_code == 200:
+                status_data = status_response.json()
+                if status_data.get("status") == "completed":
+                    # Download completed, get the file
+                    file_response = requests.get(f"{API_BASE_URL}/download/{task_id}", timeout=30)
+                    if file_response.status_code == 200:
+                        os.makedirs("downloads", exist_ok=True)
+                        with open(file_path, 'wb') as f:
+                            f.write(file_response.content)
+
+                        # Check file size
+                        file_size = os.path.getsize(file_path)
+                        if file_size < MIN_FILE_SIZE:
+                            from Audify.logger import LOGGER
+                            LOGGER(__name__).warning(f"Downloaded file is too small ({file_size} bytes). Removing.")
+                            os.remove(file_path)
+                            return None
+
+                        from Audify.logger import LOGGER
+                        LOGGER(__name__).info(f"Song Downloaded Successfully via API ✅ {file_path} ({file_size} bytes)")
+                        return file_path
+                    else:
+                        from Audify.logger import LOGGER
+                        LOGGER(__name__).error(f"Failed to get file from API. Status: {file_response.status_code}")
+                        return await fallback_dl(link)
+                elif status_data.get("status") == "failed":
+                    from Audify.logger import LOGGER
+                    LOGGER(__name__).error(f"Download failed via API: {status_data.get('error')}")
+                    return await fallback_dl(link)
+                else:
+                    # Still downloading, wait
+                    await asyncio.sleep(2)
+                    wait_time += 2
+            else:
+                from Audify.logger import LOGGER
+                LOGGER(__name__).warning(f"Failed to check status. Status: {status_response.status_code}")
+                await asyncio.sleep(2)
+                wait_time += 2
+
+        # Timeout reached
         from Audify.logger import LOGGER
-        LOGGER(__name__).error(f"❌ Download error for {video_id}: {e}")
+        LOGGER(__name__).warning("Download timeout via API, falling back to yt-dlp")
+        return await fallback_dl(link)
+
+    except Exception as e:
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"❌ API download error: {e}")
+        return await fallback_dl(link)
+
+async def fallback_dl(link: str) -> str | None:
+    """Fallback to yt-dlp if API fails"""
+    try:
+        from Audify.logger import LOGGER
+        LOGGER(__name__).info("Using yt-dlp fallback for download")
+        
+        video_id = extract_video_id(link)
+        file_path = os.path.join("downloads", f"{video_id}.mp3")
+
+        # Check if already downloaded
+        if os.path.exists(file_path):
+            return file_path
+
+        ydl_opts = {
+            'format': 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio',
+            'outtmpl': file_path,
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
+
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([link])
+
+        # Check file size
+        if os.path.exists(file_path):
+            file_size = os.path.getsize(file_path)
+            if file_size < MIN_FILE_SIZE:
+                os.remove(file_path)
+                return None
+            return file_path
         return None
 
-    except OSError as e:
+    except Exception as e:
         from Audify.logger import LOGGER
-        LOGGER(__name__).error(f"File error for {video_id}: {e}")
+        LOGGER(__name__).error(f"❌ Fallback download error: {e}")
+        return None
+
+async def get_video_info(link: str) -> dict | None:
+    """Get video information using our API or fallback"""
+    if not API_BASE_URL:
+        return await fallback_get_info(link)
+    
+    try:
+        response = requests.post(f"{API_BASE_URL}/info", json={
+            "url": link,
+            "format": "bestaudio"
+        }, timeout=10)
+
+        if response.status_code == 200:
+            data = response.json()
+            return {
+                "title": data.get("title"),
+                "duration": data.get("duration"),
+                "thumbnail": data.get("thumbnail"),
+                "uploader": data.get("uploader"),
+                "view_count": data.get("view_count")
+            }
+        else:
+            return await fallback_get_info(link)
+
+    except Exception as e:
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"❌ API info error: {e}")
+        return await fallback_get_info(link)
+
+async def fallback_get_info(link: str) -> dict | None:
+    """Fallback to yt-dlp for video info"""
+    try:
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': True,
+        }
+        
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(link, download=False)
+            return {
+                "title": info.get('title'),
+                "duration": info.get('duration'),
+                "thumbnail": info.get('thumbnail'),
+                "uploader": info.get('uploader'),
+                "view_count": info.get('view_count')
+            }
+    except Exception as e:
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"❌ Fallback info error: {e}")
         return None
 
 

@@ -1,3 +1,8 @@
+import re
+from typing import Union
+
+from youtubesearchpython.__future__ import VideosSearch
+
 from os import path
 
 from yt_dlp import YoutubeDL

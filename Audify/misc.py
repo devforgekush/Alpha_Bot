@@ -1,10 +1,12 @@
-# ---------------------------------------------------------
-# Audify Bot - All rights reserved
-# ---------------------------------------------------------
-# This code is part of the Audify Bot project.
-# Unauthorized copying, distribution, or use is prohibited.
-# © Graybots™. All rights reserved.
-# ---------------------------------------------------------
+import asyncio
+import importlib
+import sys
+from os import execl, path
+from sys import argv
+
+import psutil
+from git import Repo
+from git.exc import GitCommandError, InvalidGitRepositoryError
 
 import socket
 import time

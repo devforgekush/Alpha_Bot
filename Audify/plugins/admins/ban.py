@@ -1,12 +1,3 @@
-# ---------------------------------------------------------
-# Alphabot - All rights reserved
-# ---------------------------------------------------------
-# This code is part of the Alphabot project.
-# Unauthorized copying, distribution, or use is prohibited.
-# Developed by @devforgekush. All rights reserved.
-# ---------------------------------------------------------
-
-
 from pyrogram import filters, enums
 from pyrogram.types import (
     InlineKeyboardButton,

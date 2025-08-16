@@ -1,11 +1,3 @@
-# ---------------------------------------------------------
-# Audify Bot - All rights reserved
-# ---------------------------------------------------------
-# This code is part of the Audify Bot project.
-# Unauthorized copying, distribution, or use is prohibited.
-# © Graybots™. All rights reserved.
-# ---------------------------------------------------------
-
 import uvloop
 
 uvloop.install()
@@ -41,23 +33,31 @@ class Alphabot(Client):
                 chat_id=config.LOGGER_ID,
                 text=f"<u><b>✅ {self.mention} Bot Started Successfully.</b><u>\n\n🆔 <b>Bot ID:</b> <code>{self.id}</code>\n👤 <b>Name:</b> {self.name}\n🔗 <b>Username:</b> @{self.username}",
             )
+            LOGGER(__name__).info(f"✅ Startup log sent successfully to {config.LOGGER_ID}")
         except (errors.ChannelInvalid, errors.PeerIdInvalid):
             LOGGER(__name__).error(
-                "❌ Failed to send startup log.\n➡️ Ensure the bot is added to the specified log group or channel."
+                f"❌ Failed to send startup log.\n➡️ LOGGER_ID: {config.LOGGER_ID}\n➡️ Ensure the bot is added to the specified log group or channel."
             )
-            exit()
+            LOGGER(__name__).info("ℹ️ Bot will continue running without logging capability")
         except Exception as ex:
             LOGGER(__name__).error(
-                f"❌ Unable to access the log group/channel..\n➡️ Reason: {type(ex).__name__}."
+                f"❌ Unable to access the log group/channel.\n➡️ LOGGER_ID: {config.LOGGER_ID}\n➡️ Reason: {type(ex).__name__} - {str(ex)}"
             )
-            exit()
+            LOGGER(__name__).info("ℹ️ Bot will continue running without logging capability")
 
-        a = await self.get_chat_member(config.LOGGER_ID, self.id)
-        if a.status != ChatMemberStatus.ADMINISTRATOR:
-            LOGGER(__name__).error(
-                "⚠️ Bot is not an admin in the log group/channel.\n➡️ Please promote the bot to admin to ensure logging works properly."
+        # Check bot permissions in log group
+        try:
+            a = await self.get_chat_member(config.LOGGER_ID, self.id)
+            if a.status != ChatMemberStatus.ADMINISTRATOR:
+                LOGGER(__name__).warning(
+                    f"⚠️ Bot is not an admin in the log group/channel {config.LOGGER_ID}.\n➡️ Please promote the bot to admin to ensure logging works properly."
+                )
+            else:
+                LOGGER(__name__).info(f"✅ Bot has admin permissions in log group {config.LOGGER_ID}")
+        except Exception as ex:
+            LOGGER(__name__).warning(
+                f"⚠️ Could not verify bot permissions in log group {config.LOGGER_ID}: {type(ex).__name__}"
             )
-            exit()
         LOGGER(__name__).info(f"✅ Audify is now running as {self.name}")
 
     async def stop(self):

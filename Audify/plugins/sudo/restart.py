@@ -107,7 +107,7 @@ async def update_(client, message, _):
     else:
         os.system("pip3 install -r requirements.txt")
         os.system(f"kill -9 {os.getpid()} && bash start")
-        exit()
+        # Bot will restart automatically, no need for exit()
 
 
 @app.on_message(filters.command(["restart"]) & SUDOERS)
