@@ -121,128 +121,115 @@ async def get_thumb(videoid: str):
                 title = re.sub("\W+", " ", title).title()
             else:
                 title = "Unsupported Title"
-            try:
-                if os.path.isfile(f"cache/{videoid}_v4.png"):
-                    return f"cache/{videoid}_v4.png"
+            duration = result.get("duration")
+            if not duration:
+                duration = "Live"
+            thumbnail_data = result.get("thumbnails")
+            if thumbnail_data:
+                thumbnail = thumbnail_data[0]["url"].split("?")[0]
+            else:
+                thumbnail = None
+            views_data = result.get("viewCount")
+            if views_data:
+                views = views_data.get("short")
+                if not views:
+                    views = "Unknown Views"
+            else:
+                views = "Unknown Views"
+            channel_data = result.get("channel")
+            if channel_data:
+                channel = channel_data.get("name")
+                if not channel:
+                    channel = "Unknown Channel"
+            else:
+                channel = "Unknown Channel"
 
-                url = f"https://www.youtube.com/watch?v={videoid}"
-                results = VideosSearch(url, limit=1)
-                for result in (await results.next())["result"]:
-                    title = result.get("title")
-                    if title:
-                        title = re.sub("\W+", " ", title).title()
+        async with aiohttp.ClientSession() as session:
+            async with session.get(thumbnail) as resp:
+                content = await resp.read()
+                if resp.status == 200:
+                    content_type = resp.headers.get('Content-Type')
+                    if 'jpeg' in content_type or 'jpg' in content_type:
+                        extension = 'jpg'
+                    elif 'png' in content_type:
+                        extension = 'png'
                     else:
-                        title = "Unsupported Title"
-                    duration = result.get("duration")
-                    if not duration:
-                        duration = "Live"
-                    thumbnail_data = result.get("thumbnails")
-                    if thumbnail_data:
-                        thumbnail = thumbnail_data[0]["url"].split("?")[0]
-                    else:
-                        thumbnail = None
-                    views_data = result.get("viewCount")
-                    if views_data:
-                        views = views_data.get("short")
-                        if not views:
-                            views = "Unknown Views"
-                    else:
-                        views = "Unknown Views"
-                    channel_data = result.get("channel")
-                    if channel_data:
-                        channel = channel_data.get("name")
-                        if not channel:
-                            channel = "Unknown Channel"
-                    else:
-                        channel = "Unknown Channel"
+                        logging.error(f"Unexpected content type: {content_type}")
+                        return None
 
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(thumbnail) as resp:
-                        content = await resp.read()
-                        if resp.status == 200:
-                            content_type = resp.headers.get('Content-Type')
-                            if 'jpeg' in content_type or 'jpg' in content_type:
-                                extension = 'jpg'
-                            elif 'png' in content_type:
-                                extension = 'png'
-                            else:
-                                logging.error(f"Unexpected content type: {content_type}")
-                                return None
+                    filepath = f"cache/thumb{videoid}.png"
+                    f = await aiofiles.open(filepath, mode="wb")
+                    await f.write(await resp.read())
+                    await f.close()
+                    # os.system(f"file {filepath}")
 
-                            filepath = f"cache/thumb{videoid}.png"
-                            f = await aiofiles.open(filepath, mode="wb")
-                            await f.write(await resp.read())
-                            await f.close()
-                            # os.system(f"file {filepath}")
+        image_path = f"cache/thumb{videoid}.png"
+        youtube = Image.open(image_path)
+        image1 = changeImageSize(1280, 720, youtube)
 
-                image_path = f"cache/thumb{videoid}.png"
-                youtube = Image.open(image_path)
-                image1 = changeImageSize(1280, 720, youtube)
+        image2 = image1.convert("RGBA")
+        background = image2.filter(filter=ImageFilter.BoxBlur(20))
+        enhancer = ImageEnhance.Brightness(background)
+        background = enhancer.enhance(0.6)
 
-                image2 = image1.convert("RGBA")
-                background = image2.filter(filter=ImageFilter.BoxBlur(20))
-                enhancer = ImageEnhance.Brightness(background)
-                background = enhancer.enhance(0.6)
+        start_gradient_color = random_color()
+        end_gradient_color = random_color()
+        gradient_image = generate_gradient(1280, 720, start_gradient_color, end_gradient_color)
+        background = Image.blend(background, gradient_image, alpha=0.2)
 
-                start_gradient_color = random_color()
-                end_gradient_color = random_color()
-                gradient_image = generate_gradient(1280, 720, start_gradient_color, end_gradient_color)
-                background = Image.blend(background, gradient_image, alpha=0.2)
+        draw = ImageDraw.Draw(background)
+        arial = ImageFont.truetype("Alphabot/assets/font2.ttf", 30)
+        font = ImageFont.truetype("Alphabot/assets/font.ttf", 30)
+        title_font = ImageFont.truetype("Alphabot/assets/font3.ttf", 45)
 
-            try:
-                draw = ImageDraw.Draw(background)
-                arial = ImageFont.truetype("Alphabot/assets/font2.ttf", 30)
-                font = ImageFont.truetype("Alphabot/assets/font.ttf", 30)
-                title_font = ImageFont.truetype("Alphabot/assets/font3.ttf", 45)
+        circle_thumbnail = crop_center_circle(youtube, 400, 20, start_gradient_color)
+        circle_thumbnail = circle_thumbnail.resize((400, 400))
+        circle_position = (120, 160)
+        background.paste(circle_thumbnail, circle_position, circle_thumbnail)
 
-                circle_thumbnail = crop_center_circle(youtube, 400, 20, start_gradient_color)
-                circle_thumbnail = circle_thumbnail.resize((400, 400))
-                circle_position = (120, 160)
-                background.paste(circle_thumbnail, circle_position, circle_thumbnail)
+        text_x_position = 565
+        title1 = truncate(title)
+        draw_text_with_shadow(background, draw, (text_x_position, 180), title1[0], title_font, (255, 255, 255))
+        draw_text_with_shadow(background, draw, (text_x_position, 230), title1[1], title_font, (255, 255, 255))
+        draw_text_with_shadow(background, draw, (text_x_position, 320), f"{channel}  |  {views[:23]}", arial, (255, 255, 255))
 
-                text_x_position = 565
-                title1 = truncate(title)
-                draw_text_with_shadow(background, draw, (text_x_position, 180), title1[0], title_font, (255, 255, 255))
-                draw_text_with_shadow(background, draw, (text_x_position, 230), title1[1], title_font, (255, 255, 255))
-                draw_text_with_shadow(background, draw, (text_x_position, 320), f"{channel}  |  {views[:23]}", arial, (255, 255, 255))
+        line_length = 580  
+        line_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
-                line_length = 580  
-                line_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        if duration != "Live":
+            color_line_percentage = random.uniform(0.15, 0.85)
+            color_line_length = int(line_length * color_line_percentage)
+            white_line_length = line_length - color_line_length
 
-                if duration != "Live":
-                    color_line_percentage = random.uniform(0.15, 0.85)
-                    color_line_length = int(line_length * color_line_percentage)
-                    white_line_length = line_length - color_line_length
+            start_point_color = (text_x_position, 380)
+            end_point_color = (text_x_position + color_line_length, 380)
+            draw.line([start_point_color, end_point_color], fill=line_color, width=9)
+            start_point_white = (end_point_color[0], 380)
+            end_point_white = (text_x_position + line_length, 380)
+            draw.line([start_point_white, end_point_white], fill=(255, 255, 255), width=9)
+            circle_radius = 10 
+            circle_position = (end_point_color[0], end_point_color[1])
+            draw.ellipse([circle_position[0] - circle_radius, circle_position[1] - circle_radius,
+                        circle_position[0] + circle_radius, circle_position[1] + circle_radius], fill=line_color)
+        else:
+            line_color = (255, 0, 0)
+            start_point_color = (text_x_position, 380)
+            end_point_color = (text_x_position + line_length, 380)
+            draw.line([start_point_color, end_point_color], fill=line_color, width=9)
+            circle_radius = 10 
+            circle_position = (end_point_color[0], end_point_color[1])
+            draw.ellipse([circle_position[0] - circle_radius, circle_position[1] - circle_radius,
+                        circle_position[0] + circle_radius, circle_position[1] + circle_radius], fill=line_color)
 
-                    start_point_color = (text_x_position, 380)
-                    end_point_color = (text_x_position + color_line_length, 380)
-                    draw.line([start_point_color, end_point_color], fill=line_color, width=9)
-                    start_point_white = (end_point_color[0], 380)
-                    end_point_white = (text_x_position + line_length, 380)
-                    draw.line([start_point_white, end_point_white], fill=(255, 255, 255), width=9)
-                    circle_radius = 10 
-                    circle_position = (end_point_color[0], end_point_color[1])
-                    draw.ellipse([circle_position[0] - circle_radius, circle_position[1] - circle_radius,
-                                circle_position[0] + circle_radius, circle_position[1] + circle_radius], fill=line_color)
-                else:
-                    line_color = (255, 0, 0)
-                    start_point_color = (text_x_position, 380)
-                    end_point_color = (text_x_position + line_length, 380)
-                    draw.line([start_point_color, end_point_color], fill=line_color, width=9)
-                    circle_radius = 10 
-                    circle_position = (end_point_color[0], end_point_color[1])
-                    draw.ellipse([circle_position[0] - circle_radius, circle_position[1] - circle_radius,
-                                circle_position[0] + circle_radius, circle_position[1] + circle_radius], fill=line_color)
-
-                draw_text_with_shadow(background, draw, (text_x_position, 400), "00:00", arial, (255, 255, 255))
-                draw_text_with_shadow(background, draw, (1080, 400), duration, arial, (255, 255, 255))
-                play_icons = Image.open("Alphabot/assets/play_icons.png")
-                play_icons = play_icons.resize((580, 62))
-                background.paste(play_icons, (text_x_position, 450), play_icons)
-                os.remove(f"cache/thumb{videoid}.png")
-                background_path = f"cache/{videoid}_v4.png"
-                background.save(background_path)
-                return background_path
-            except Exception as e:
-                logging.error(f"Error in font loading or thumbnail generation: {e}")
-                return None
+        draw_text_with_shadow(background, draw, (text_x_position, 400), "00:00", arial, (255, 255, 255))
+        draw_text_with_shadow(background, draw, (1080, 400), duration, arial, (255, 255, 255))
+        play_icons = Image.open("Alphabot/assets/play_icons.png")
+        play_icons = play_icons.resize((580, 62))
+        background.paste(play_icons, (text_x_position, 450), play_icons)
+        os.remove(f"cache/thumb{videoid}.png")
+        background_path = f"cache/{videoid}_v4.png"
+        background.save(background_path)
+        return background_path
+    except Exception as e:
+        logging.error(f"Error generating thumbnail for video {videoid}: {e}")
+        return None
