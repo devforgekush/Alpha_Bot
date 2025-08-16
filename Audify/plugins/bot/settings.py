@@ -187,24 +187,19 @@ async def addition(client, CallbackQuery, _):
     current = await get_upvote_count(CallbackQuery.message.chat.id)
     if mode == "M":
         final = current - 2
-    from Audify.logger import LOGGER
-    LOGGER(__name__).info(final)
+        from Audify.logger import LOGGER
+        LOGGER(__name__).info(final)
         if final == 0:
-            return await CallbackQuery.answer(
-                _["setting_11"],
-                show_alert=True,
-            )
+            return await CallbackQuery.answer(_["setting_11"], show_alert=True)
         if final <= 2:
             final = 2
         await set_upvotes(CallbackQuery.message.chat.id, final)
     else:
         final = current + 2
-    LOGGER(__name__).info(final)
+        from Audify.logger import LOGGER
+        LOGGER(__name__).info(final)
         if final == 17:
-            return await CallbackQuery.answer(
-                _["setting_12"],
-                show_alert=True,
-            )
+            return await CallbackQuery.answer(_["setting_12"], show_alert=True)
         if final >= 15:
             final = 15
         await set_upvotes(CallbackQuery.message.chat.id, final)

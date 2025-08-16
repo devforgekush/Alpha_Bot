@@ -50,10 +50,13 @@ async def clone_and_zip(repo_url: str) -> str | None:
         zip_path = shutil.make_archive(repo_path, "zip", repo_path)
         return zip_path
     except Exception as e:
-    from Audify.logger import LOGGER
-    LOGGER(__name__).error(f"[DOWNLOADREPO ERROR] - {e}")
+        from Audify.logger import LOGGER
+        LOGGER(__name__).error(f"[DOWNLOADREPO ERROR] - {e}")
         return None
     finally:
         # Clean the temp directory if it exists
-        if os.path.exists(repo_path):
-            shutil.rmtree(repo_path)
+        try:
+            if 'repo_path' in locals() and os.path.exists(repo_path):
+                shutil.rmtree(repo_path)
+        except Exception:
+            pass

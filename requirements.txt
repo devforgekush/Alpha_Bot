@@ -76,3 +76,6 @@ pymongo==4.3.3
 
 # GitPython provides `git` module used by misc.py and update helpers
 GitPython==3.1.31
+
+# ntgcalls provides TelegramServerError and server-side call helpers used by the voice stack
+ntgcalls

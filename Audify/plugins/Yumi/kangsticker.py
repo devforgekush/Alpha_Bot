@@ -106,10 +106,10 @@ async def kang(client, message: Message):
     except ShortnameOccupyFailed:
         return await message.reply_text("⚠️ Change your Telegram username to continue.")
     except Exception as e:
-        await message.reply_text(f"⚠️ Error: {str(e)}")
+    await message.reply_text(f"⚠️ Error: {str(e)}")
     from Audify.logger import LOGGER
     LOGGER(__name__).error(format_exc())
-        return
+    return
 
     # Add sticker to pack
     packnum = 0
