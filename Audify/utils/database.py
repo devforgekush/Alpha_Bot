@@ -44,7 +44,7 @@ except ImportError:
 import config
 from ..logger import LOGGER
 from ..mongo.logs import LOG_DB
-from ..utils.formatters import check_duration, limit, seconds_to_min
+from ..utils.formatters import check_duration, seconds_to_min
 
 import random
 from typing import Dict, List, Union
